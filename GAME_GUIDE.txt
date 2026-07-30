@@ -1,0 +1,21 @@
+THE LIFE QUEST — GAME EDITION
+
+Open index.html to start.
+
+FLOW
+1. Player enters a name and selects an avatar.
+2. A cinematic introduction begins.
+3. Level 1 teaches the beginning of Planet Earth.
+4. Reading all story scenes unlocks the mini-game.
+5. Completing the mini-game unlocks the five-question quiz.
+6. A score of 3/5 or higher completes the level and unlocks the next chapter.
+7. Progress, XP, coins, stars, badges and best scores are stored in the browser using localStorage.
+
+CONTENT
+- 20 sequential story-game levels
+- Original 60-page knowledge library retained as library.html
+- Every game page is self-contained with inline CSS and JavaScript
+- No internet or external library is required
+
+RESET
+Use “Change player” on the home screen to erase game progress and begin again.

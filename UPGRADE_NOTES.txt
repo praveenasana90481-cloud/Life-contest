@@ -1,0 +1,32 @@
+UPGRADE NOTES
+=============
+
+Architecture
+• Reorganised the project as a coherent learning portal.
+• Added persistent sidebar navigation, breadcrumbs and previous/next controls.
+• Added responsive desktop, tablet and mobile layouts.
+• Kept each webpage portable by embedding all CSS and JavaScript in the HTML.
+
+Learning Experience
+• Added learning objectives, key-point cards, exam tips and recall prompts.
+• Added interactive flashcards and quizzes.
+• Added page-level notes saved in localStorage.
+• Added progress tracking across the complete lesson library.
+• Added site-wide search with Ctrl/Cmd + K.
+
+Accessibility
+• Added semantic landmarks and skip-friendly page structure.
+• Added dark mode, text-size controls, print mode and Indian-English read-aloud.
+• Improved contrast, spacing, focus states and mobile touch targets.
+
+New Content
+• Five Study Hub pages.
+• Fifteen expanded biology topic pages.
+• Twenty-one individual organelle pages.
+• Scientific evidence and future speculation are clearly distinguished.
+
+Technical Validation
+• No broken local links or missing local media references.
+• No external CSS links.
+• No script src references.
+• Every HTML file has inline CSS and inline JavaScript.

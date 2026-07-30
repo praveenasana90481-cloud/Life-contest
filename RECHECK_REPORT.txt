@@ -1,0 +1,24 @@
+THE LIFE QUEST — SECOND FULL RECHECK
+Date: 26 July 2026
+
+Rechecked from the final packaged ZIP, not from an earlier working folder.
+
+Results:
+- 82 HTML files parsed successfully
+- 20 Adventure level files present
+- 0 broken local links or missing referenced media
+- 0 duplicate HTML IDs
+- 0 inline JavaScript syntax errors
+- All levels contain 4 story scenes and 4 progress dots
+- All levels contain 20 Journey Map nodes
+- All levels contain mission, quiz and completion sections
+- All quizzes contain exactly 5 valid questions
+- All correct-answer indexes are within range
+- Drag-and-drop code is present in all 20 levels
+- Mobile/tap mission interaction support is present
+- One consistent progress key is used: lifeQuestPlayerV2
+- Horizontal-overflow guards are present on the main game and all Adventure levels
+- Desktop and mobile headless-browser smoke test: 46 page/viewport combinations, 0 layout overflow and 0 runtime console exceptions
+
+Important browser limitation:
+A webpage cannot enter fullscreen before a user gesture. The site requests fullscreen on the learner's first interaction and on the Begin button.

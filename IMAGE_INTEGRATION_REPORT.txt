@@ -1,0 +1,8 @@
+THE LIFE QUEST — IMAGE INTEGRATION REPORT
+
+- Original biology diagrams added to all 20 Adventure levels.
+- Stills from the original INTRO.mp4 added to origin, tissue, evolution and future levels.
+- Responsive two-column visual galleries collapse to one column on mobile.
+- Images use lazy loading, descriptive alt text and contained scaling.
+- Homepage now includes a visual preview strip.
+- Existing missions, quizzes, rewards and progress storage were not changed.

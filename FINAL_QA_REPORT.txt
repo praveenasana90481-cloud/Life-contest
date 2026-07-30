@@ -1,0 +1,31 @@
+THE LIFE QUEST — FINAL QA REPORT
+
+Scope checked:
+- Main onboarding and campaign page
+- Complete 20-level Adventure folder
+- Victory page
+- Knowledge library and supporting lesson pages
+
+Corrections and hardening:
+- Fixed Journey Map locked-state overflow and disabled locked map links.
+- Added responsive guards to prevent horizontal page overflow.
+- Added min-width protections for grid and flex children.
+- Improved mobile header, story controls, quiz HUD, answer cards and completion buttons.
+- Improved drag-and-drop chambers for narrow screens.
+- Added long-text wrapping for mission cards, facts, headings and answers.
+- Added keyboard focus indicators and disabled-button styling.
+- Added reduced-motion support.
+- Fixed duplicate HTML IDs in Mitosis, Meiosis and Human Body lessons.
+- Preserved the same localStorage key across index, all levels and victory page.
+- Retained all level content, quizzes, missions, XP, coins, stars, badges and progression.
+
+Automated static validation:
+- 82 HTML files checked.
+- 20 Adventure levels checked.
+- 0 missing local links or media references.
+- 0 duplicate HTML IDs.
+- 0 JavaScript syntax errors.
+- Mission and quiz data structures checked across all 20 levels.
+
+Browser note:
+Fullscreen cannot legally be forced by a webpage before a user interaction in modern browsers. The site requests fullscreen on the learner's first click and again on “Begin my adventure,” which is the most reliable browser-compatible behaviour.
