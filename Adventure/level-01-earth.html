@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#07111f" name="theme-color"/><title>Level 1: Birth of Planet Earth | The Life Quest</title>
+<style>
+:root{--bg:#07111f;--panel:#101f35;--panel2:#142945;--text:#eef7ff;--muted:#9cb4cc;--gold:#ffd166;--cyan:#4cc9f0;--green:#55d6a8;--danger:#ff5d73;--line:rgba(255,255,255,.11);--shadow:0 22px 70px rgba(0,0,0,.38);--radius:24px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,ui-rounded,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:radial-gradient(circle at 10% 0%,#17345a 0,transparent 34%),radial-gradient(circle at 90% 10%,#291d58 0,transparent 30%),linear-gradient(150deg,#050b14,#08172a 50%,#07111f);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.25;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:33px 33px;mask-image:linear-gradient(#000,transparent 90%)}button,input,select{font:inherit}a{color:inherit}.hidden{display:none!important}.gamebar{position:sticky;top:0;z-index:1000;display:flex;align-items:center;gap:12px;padding:12px clamp(14px,3vw,32px);background:rgba(5,11,20,.83);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:950;letter-spacing:.02em}.logo i{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#4cc9f0,#7950f2);font-style:normal;box-shadow:0 0 28px rgba(76,201,240,.35)}.status{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.pill{display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:rgba(255,255,255,.055);padding:7px 10px;border-radius:999px;font-size:.82rem;font-weight:850}.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#203a61;border:2px solid rgba(255,255,255,.18)}.sound{border:1px solid var(--line);background:#142945;color:#fff;width:38px;height:38px;border-radius:12px;cursor:pointer}.shell{max-width:1220px;margin:auto;padding:clamp(20px,4vw,46px) clamp(14px,3vw,28px) 80px}.glass{background:linear-gradient(145deg,rgba(20,41,69,.92),rgba(12,27,47,.94));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.btn{border:0;border-radius:14px;padding:12px 17px;font-weight:950;cursor:pointer;color:#091422;background:linear-gradient(135deg,var(--gold),#ff9f1c);box-shadow:0 10px 25px rgba(255,184,0,.22);transition:.2s}.btn:hover{transform:translateY(-2px)}.btn.alt{color:#fff;background:#173557;border:1px solid rgba(255,255,255,.14);box-shadow:none}.btn.good{background:linear-gradient(135deg,#55d6a8,#1fbf8f)}.btn.danger{background:linear-gradient(135deg,#ff758f,#ff4d6d);color:#fff}.section-title{margin:0 0 8px;font-size:clamp(1.5rem,3vw,2.35rem)}.sub{color:var(--muted);margin:0}.progressline{height:12px;border-radius:99px;background:#081321;border:1px solid var(--line);overflow:hidden}.progressline span{display:block;height:100%;width:0;background:linear-gradient(90deg,#4cc9f0,#55d6a8,#ffd166);transition:width .5s}.spark{position:fixed;width:9px;height:9px;border-radius:50%;pointer-events:none;z-index:9999;animation:fly .85s ease-out forwards}@keyframes fly{to{transform:translate(var(--x),var(--y)) rotate(500deg);opacity:0}}.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,120px);background:#fff;color:#0a1320;padding:12px 18px;border-radius:14px;font-weight:900;z-index:9999;transition:.3s;box-shadow:var(--shadow)}.toast.show{transform:translate(-50%,0)}.xpfloat{position:fixed;z-index:9999;font-weight:1000;color:var(--gold);animation:xp 1.2s forwards;pointer-events:none}@keyframes xp{to{transform:translateY(-70px) scale(1.3);opacity:0}}@media(max-width:700px){.logo span{display:none}.pill.namepill{display:none}.status{gap:5px}.pill{padding:6px 8px}.gamebar{padding:9px 10px}}
+
+.levelhero{position:relative;overflow:hidden;padding:clamp(26px,5vw,58px);min-height:330px;display:grid;align-content:end;background:radial-gradient(circle at 84% 12%,color-mix(in srgb,var(--level) 55%,transparent),transparent 35%),linear-gradient(135deg,#112947,#0a1728)}.levelhero:after{content:attr(data-icon);position:absolute;right:clamp(18px,7vw,85px);top:28px;font-size:clamp(5rem,15vw,10rem);filter:drop-shadow(0 20px 30px rgba(0,0,0,.35));animation:float 4s ease-in-out infinite}@keyframes float{50%{transform:translateY(-12px) rotate(2deg)}}.kicker{font-size:.78rem;text-transform:uppercase;letter-spacing:.17em;font-weight:950;color:var(--gold)}.levelhero h1{font-size:clamp(2.35rem,7vw,5.8rem);line-height:.96;letter-spacing:-.055em;margin:12px 0;max-width:780px}.levelhero p{max-width:660px;color:#d2e5f7;font-size:1.08rem}.herofoot{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}.levelchip{padding:7px 11px;border-radius:999px;background:rgba(255,255,255,.09);border:1px solid var(--line);font-size:.78rem;font-weight:850}.journey{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:22px;margin-top:22px}.maincol{display:grid;gap:22px}.sidecol{display:grid;gap:16px;align-content:start;position:sticky;top:82px}.sidebox{padding:18px}.sidebox h3{margin:0 0 10px}.facts{margin:0;padding-left:19px;color:#d6e8f9}.facts li{margin:8px 0}.memory{padding:14px;border-radius:14px;background:rgba(255,209,102,.1);border:1px solid rgba(255,209,102,.25);color:#ffe7a8;font-weight:850}.story{padding:clamp(18px,3vw,30px)}.storytop{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px}.scene-meter{font-size:.8rem;color:var(--muted);font-weight:850}.scene{display:none;min-height:230px;animation:sceneIn .45s ease}.scene.active{display:block}@keyframes sceneIn{from{opacity:0;transform:translateX(22px)}to{opacity:1;transform:none}}.scene-no{width:50px;height:50px;border-radius:17px;display:grid;place-items:center;background:color-mix(in srgb,var(--level) 35%,#142945);border:1px solid color-mix(in srgb,var(--level) 70%,white 10%);font-weight:1000}.scene h2{font-size:clamp(1.6rem,4vw,2.55rem);margin:16px 0 9px}.scene p{color:#c2d7e9;font-size:1.04rem;line-height:1.75}.storynav{display:flex;justify-content:space-between;gap:10px;align-items:center}.dots{display:flex;gap:7px}.dots i{width:9px;height:9px;border-radius:50%;background:#334b68}.dots i.on{background:var(--gold);box-shadow:0 0 12px var(--gold)}.mission,.quizbox,.completebox{padding:clamp(18px,3vw,30px)}.mission.locked,.quizbox.locked{position:relative;min-height:220px;display:grid;place-items:center;text-align:center}.mission.locked:after,.quizbox.locked:after{content:"🔒 Complete the required step to unlock";position:absolute;inset:0;display:grid;place-items:center;background:rgba(6,14,25,.88);backdrop-filter:blur(5px);border-radius:var(--radius);font-weight:950;color:#c9d9e9}.mission.locked.unlocked:after,.quizbox.locked.unlocked:after{display:none}.missiongrid{display:grid;gap:10px;margin:20px 0}.pick,.orderitem,.tfitem{padding:13px 14px;border:1px solid var(--line);border-radius:13px;background:#10243d;color:#eaf6ff;cursor:pointer;text-align:left;transition:.15s}.pick:hover,.orderitem:hover{border-color:var(--level);transform:translateY(-1px)}.orderitem.selected{background:color-mix(in srgb,var(--level) 32%,#10243d);border-color:var(--level)}.selected-order{min-height:52px;border:1px dashed rgba(255,255,255,.22);border-radius:13px;padding:10px;color:#bdd1e3;margin:12px 0}.matchrow,.sortrow,.choicerow{display:grid;grid-template-columns:1.1fr 1fr;gap:12px;align-items:center;padding:10px;border-bottom:1px solid rgba(255,255,255,.07)}select{width:100%;background:#08182b;color:#fff;border:1px solid var(--line);border-radius:11px;padding:10px}.missionresult,.quizresult{font-weight:950;min-height:28px}.questions{display:grid;gap:15px;margin:20px 0}.question{padding:16px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.025)}.question h4{margin:0 0 11px}.answers{display:grid;gap:8px}.answer{display:flex;gap:9px;align-items:flex-start;padding:10px;border-radius:11px;background:#0b1a2d;cursor:pointer;border:1px solid transparent}.answer:hover{border-color:#45617e}.question.correct{border-color:#55d6a8;background:rgba(85,214,168,.08)}.question.wrong{border-color:#ff6b81;background:rgba(255,107,129,.07)}.completebox{text-align:center;background:radial-gradient(circle at 50% 0%,rgba(255,209,102,.18),transparent 45%),linear-gradient(145deg,#132844,#0b192b)}.stars{font-size:2.3rem;letter-spacing:6px;margin:12px}.nextlinks{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.locked-next{opacity:.55;pointer-events:none}.mapmini{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.mapdot{aspect-ratio:1;border-radius:50%;display:grid;place-items:center;background:#0a192b;border:1px solid var(--line);font-size:.68rem;font-weight:950}.mapdot.done{background:#1b8d6b}.mapdot.current{outline:2px solid var(--gold);outline-offset:2px}.mapdot.locked{opacity:.35;min-height:0;position:relative;text-align:center}.mapdot.locked:after{display:none}.deep{display:block;text-decoration:none;padding:13px;border:1px solid rgba(76,201,240,.22);background:rgba(76,201,240,.08);border-radius:13px;color:#bdefff;font-weight:850}.deep:hover{background:rgba(76,201,240,.15)}@media(max-width:900px){.journey{grid-template-columns:1fr}.sidecol{position:static;grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.sidecol{grid-template-columns:1fr}.levelhero:after{opacity:.35}.levelhero h1{max-width:90%}.matchrow,.sortrow,.choicerow{grid-template-columns:1fr}.storynav{align-items:flex-end}.scene{min-height:310px}}
+
+    .quizgame{display:grid;gap:16px;margin:20px 0}
+    .quizhud{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:13px 14px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.04)}
+    .quizhud strong{color:var(--gold)}
+    .quizscore{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+    .quizscore span{padding:6px 9px;border-radius:999px;border:1px solid var(--line);background:#09192b;font-size:.78rem;font-weight:950}
+    .quizcard{position:relative;overflow:hidden;padding:clamp(18px,3vw,28px);border:1px solid rgba(255,255,255,.12);border-radius:22px;background:radial-gradient(circle at 90% 0%,color-mix(in srgb,var(--level) 24%,transparent),transparent 42%),linear-gradient(145deg,#10243d,#08182b);box-shadow:0 18px 40px rgba(0,0,0,.22);animation:quizPop .35s ease}
+    @keyframes quizPop{from{opacity:0;transform:translateY(16px) scale(.98)}to{opacity:1;transform:none}}
+    .quizcard h4{margin:0 0 16px;font-size:clamp(1.15rem,2.4vw,1.55rem);line-height:1.35}
+    .answercards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .answercard{min-height:76px;display:flex;align-items:center;gap:12px;width:100%;text-align:left;color:#eaf6ff;border:1px solid rgba(255,255,255,.12);border-radius:17px;background:#0b1a2d;cursor:pointer;padding:13px 14px;transition:.18s;font-weight:850}
+    .answercard:hover:not(:disabled){transform:translateY(-2px);border-color:var(--level);background:#132b49}
+    .answercard b{min-width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:rgba(255,255,255,.09);color:var(--gold)}
+    .answercard.correct{border-color:#55d6a8;background:rgba(85,214,168,.14)}
+    .answercard.wrong{border-color:#ff6b81;background:rgba(255,107,129,.13)}
+    .answercard.dim{opacity:.48}.answercard:disabled{cursor:default}
+    .feedbackbox{margin-top:14px;min-height:52px;padding:13px 14px;border-radius:15px;border:1px dashed rgba(255,255,255,.18);color:#cde2f5;background:rgba(255,255,255,.035);font-weight:850}
+    .feedbackbox.good{border-color:rgba(85,214,168,.55);background:rgba(85,214,168,.08);color:#b9ffdf}
+    .feedbackbox.bad{border-color:rgba(255,93,115,.55);background:rgba(255,93,115,.08);color:#ffd0d7}
+    .quizfinal{text-align:center;padding:clamp(18px,3vw,30px);border-radius:22px;border:1px solid var(--line);background:radial-gradient(circle at 50% 0%,rgba(255,209,102,.18),transparent 45%),#0b1a2d}
+    .quizfinal .scorebig{font-size:clamp(3rem,9vw,6rem);line-height:1;color:var(--gold);font-weight:1000;margin:8px 0}
+    @media(max-width:650px){.quizhud{grid-template-columns:1fr}.quizscore{justify-content:flex-start}.answercards{grid-template-columns:1fr}.answercard{min-height:62px}}
+
+
+/* Interactive drag-and-drop mission system */
+.drag-help{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:12px 14px;border-radius:14px;background:rgba(76,201,240,.08);border:1px solid rgba(76,201,240,.2);color:#ccefff;font-size:.88rem;font-weight:800}
+.drag-bank{display:flex;flex-wrap:wrap;gap:10px;min-height:76px;padding:14px;border:1px dashed rgba(255,255,255,.22);border-radius:16px;background:#09192b;margin-top:14px}
+.drag-card{padding:11px 13px;border:1px solid rgba(255,255,255,.15);border-radius:13px;background:linear-gradient(145deg,#183454,#10243d);color:#eef7ff;cursor:grab;font-weight:850;box-shadow:0 8px 18px rgba(0,0,0,.2);transition:.18s;user-select:none;touch-action:manipulation}
+.drag-card:hover{transform:translateY(-2px);border-color:var(--level)}
+.drag-card.selected{outline:3px solid var(--gold);transform:translateY(-2px)}
+.drag-card.correct-card{border-color:#55d6a8;background:rgba(29,123,92,.75)}
+.drag-card.wrong-card{border-color:#ff6b81;background:rgba(132,38,59,.72)}
+.drop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:15px}
+.drop-zone{min-height:120px;padding:13px;border:2px dashed rgba(255,255,255,.18);border-radius:17px;background:rgba(255,255,255,.025);transition:.18s}
+.drop-zone h4{margin:0 0 9px;color:var(--gold)}
+.drop-zone.drag-over,.sequence-zone.drag-over,.choice-target.drag-over{border-color:var(--cyan);background:rgba(76,201,240,.1);transform:scale(1.01)}
+.drop-zone .zone-items{display:flex;flex-wrap:wrap;gap:8px;min-height:47px}
+.sequence-zone{display:flex;align-items:center;flex-wrap:wrap;gap:9px;min-height:94px;padding:14px;border:2px dashed rgba(255,255,255,.2);border-radius:17px;background:#09192b;margin-top:14px}
+.sequence-zone:empty:before{content:'Drop the events here in the correct order';color:var(--muted);font-weight:800}
+.sequence-zone .drag-card{position:relative;padding-left:38px}
+.sequence-zone .drag-card:before{content:attr(data-pos);position:absolute;left:11px;top:50%;transform:translateY(-50%);width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--gold);color:#101820;font-size:.72rem}
+.match-zone{min-height:110px}
+.match-zone p{margin:0 0 10px;color:#c8dced;line-height:1.45}
+.choice-mission{display:grid;gap:13px;margin-top:15px}
+.choice-card{padding:15px;border:1px solid var(--line);border-radius:17px;background:rgba(255,255,255,.025)}
+.choice-card h4{margin:0 0 11px}
+.choice-options{display:flex;flex-wrap:wrap;gap:8px}
+.choice-target{min-height:55px;margin-top:10px;padding:8px;border:2px dashed rgba(255,255,255,.2);border-radius:13px;background:#09192b}
+.choice-target:empty:before{content:'Drop or tap the best answer here';color:var(--muted);font-size:.82rem;font-weight:800}
+.mission-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+@media(max-width:600px){.drop-grid{grid-template-columns:1fr}.drag-card{width:100%;text-align:center}.drag-bank{display:grid}.choice-options{display:grid}.sequence-zone{display:grid}.sequence-zone .drag-card{width:100%}}
+
+
+/* Final QA hardening */
+html,body{max-width:100%;overflow-x:hidden}
+img,video,svg,canvas{max-width:100%;height:auto}
+.journey,.maincol,.sidecol,.story,.mission,.quizbox,.completebox,.sidebox,.quizcard,.quizhud,.choice-card,.drop-zone,.drag-bank,.sequence-zone{min-width:0}
+h1,h2,h3,h4,p,li,.drag-card,.answercard span,.memory,.deep{overflow-wrap:anywhere;word-break:normal}
+button,a,input,select{touch-action:manipulation}
+button:disabled{cursor:not-allowed;opacity:.58;transform:none!important}
+.btn:focus-visible,.sound:focus-visible,.answercard:focus-visible,.drag-card:focus-visible,.mapdot:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.mapmini{width:100%;grid-template-columns:repeat(5,minmax(0,1fr));overflow:hidden}
+.mapdot{width:100%;min-width:0;min-height:0;text-decoration:none;line-height:1;pointer-events:auto}
+.mapdot.locked{pointer-events:none;cursor:not-allowed;opacity:.3}
+.drop-grid{grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))!important}
+.drag-bank,.sequence-zone,.zone-items,.choice-options{max-width:100%}
+.drag-card{max-width:100%;white-space:normal}
+.quizhud{min-width:0}
+.quizscore{flex-wrap:wrap;justify-content:flex-end}
+.answercard{width:100%;min-width:0;text-align:left}
+.toast{max-width:calc(100vw - 28px);text-align:center}
+@media(max-width:700px){
+ .gamebar{align-items:flex-start;flex-wrap:wrap}
+ .status{width:auto;max-width:calc(100% - 54px);justify-content:flex-end}
+ .pill{font-size:.75rem;white-space:nowrap}
+ .levelhero{min-height:280px;padding:24px 18px}
+ .levelhero h1{font-size:clamp(2rem,12vw,3.5rem);max-width:100%;letter-spacing:-.035em}
+ .levelhero p{font-size:1rem}
+ .storytop{align-items:flex-start}
+ .storynav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+ .storynav .btn{padding:10px 11px;font-size:.82rem}
+ .dots{justify-content:center}
+ .scene{min-height:0}
+ .quizhud{grid-template-columns:1fr}
+ .quizscore{justify-content:flex-start}
+ .answercard{padding:12px}
+ .nextlinks .btn{width:100%;text-align:center}
+}
+@media(max-width:390px){
+ .status .pill:nth-child(4){display:none}
+ .shell{padding-left:10px;padding-right:10px}
+ .glass{border-radius:18px}
+ .mapmini{gap:5px}
+ .mapdot{font-size:.62rem}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+
+
+/* Integrated game visuals */
+.visual-discovery{margin-top:22px;padding:clamp(16px,3vw,26px);overflow:hidden}
+.visual-head{display:flex;justify-content:space-between;gap:14px;align-items:end;margin-bottom:14px}
+.visual-head h2{margin:4px 0 0;font-size:clamp(1.35rem,3vw,2rem)}
+.visual-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.visual-card{margin:0;position:relative;overflow:hidden;border-radius:18px;border:1px solid var(--line);background:#08182b;min-width:0}
+.visual-card img{display:block;width:100%;height:clamp(210px,28vw,360px);object-fit:contain;background:linear-gradient(145deg,#071423,#102844);padding:10px}
+.visual-card figcaption{padding:12px 14px;color:#c8dbee;line-height:1.5;font-size:.92rem;border-top:1px solid var(--line)}
+.visual-card:hover img{transform:scale(1.025)}
+.visual-card img{transition:transform .3s ease}
+@media(max-width:700px){.visual-grid{grid-template-columns:1fr}.visual-card img{height:250px}.visual-head{align-items:start;flex-direction:column}}
+</style></head><body style="--level:#ff7a45">
+<header class="gamebar">
+<a class="logo" href="../index.html"><i>🧬</i><span>The Life Quest</span></a>
+<div class="status">
+<div class="pill namepill"><span class="avatar" data-avatar="">🧑‍🚀</span><span data-player="">Explorer</span></div>
+<div class="pill">⚡ <span data-xp="">0</span> XP</div>
+<div class="pill">🪙 <span data-coins="">0</span></div>
+<div class="pill">🔥 <span data-streak="">1</span></div>
+<button aria-label="Toggle sound" class="sound" id="sound">🔊</button>
+</div></header>
+<main class="shell">
+<section class="levelhero glass" data-icon="🌍">
+<div class="kicker">Level 1 · Cosmic Forge</div>
+<h1>Birth of Planet Earth</h1><p>Travel 4.6 billion years into the past and build a planet from dust.</p>
+<div class="herofoot"><span class="levelchip">📖 4 story scenes</span><span class="levelchip">🎮 1 mission</span><span class="levelchip">❓ 5 quiz questions</span><span class="levelchip">⭐ Up to 3 stars</span></div>
+</section><section aria-label="Visual learning gallery" class="visual-discovery glass"><div class="visual-head"><div><div class="kicker">Visual discovery</div><h2>See the science</h2></div><p class="sub">Original diagrams and media from your biology library.</p></div><div class="visual-grid"><figure class="visual-card"><img alt="Early Earth supplied heat, water and chemical energy." decoding="async" loading="lazy" src="game-images/origin-ocean.jpg"/><figcaption>Early Earth supplied heat, water and chemical energy.</figcaption></figure><figure class="visual-card"><img alt="A long chemical journey eventually produced the earliest cells." decoding="async" loading="lazy" src="game-images/first-cell.jpg"/><figcaption>A long chemical journey eventually produced the earliest cells.</figcaption></figure></div></section>
+<div class="journey">
+<div class="maincol">
+<section class="story glass">
+<div class="storytop"><div><div class="kicker">Story Mode</div><h2 class="section-title">Learn before you play</h2></div><div class="scene-meter"><span id="sceneNow">1</span> / 4</div></div>
+<div id="scenes"><section class="scene active" data-scene="0">
+<div class="scene-no">1</div><h2>A Cloud Begins to Collapse</h2><p>The Solar System began inside a huge cloud of gas and dust called the solar nebula. Gravity pulled the material inward, probably helped by a nearby stellar shockwave.</p></section><section class="scene" data-scene="1">
+<div class="scene-no">2</div><h2>A Spinning Disk Forms</h2><p>As the cloud collapsed, it spun faster and flattened into a disk. Most matter collected at the centre to form the young Sun; smaller particles collided around it.</p></section><section class="scene" data-scene="2">
+<div class="scene-no">3</div><h2>Earth Grows and Changes</h2><p>Dust became rocks, rocks became planetesimals and repeated collisions built the early Earth. Heavy materials sank to form the core while lighter rocks formed the mantle and crust.</p></section><section class="scene" data-scene="3">
+<div class="scene-no">4</div><h2>A Habitable World Emerges</h2><p>Volcanic gases helped form an atmosphere. As Earth cooled, water condensed into oceans. The Moon, magnetic field and plate activity all influenced the young planet.</p></section></div>
+<div class="storynav"><button class="btn alt" id="prevScene">← Previous</button><div class="dots" id="dots"><i class="on"></i><i class=""></i><i class=""></i><i class=""></i></div><button class="btn" id="nextScene">Next scene →</button></div>
+</section>
+<section class="mission glass locked" id="missionBox">
+<div class="kicker">Mini-game</div><h2 class="section-title">Planet Builder</h2><p class="sub">Select the four events in the correct order.</p>
+<div class="missiongrid" id="missionArea"></div><div class="missionresult" id="missionResult"></div><button class="btn good" id="checkMission">Check mission</button>
+</section>
+<section class="quizbox glass locked" id="quizBox">
+<div class="kicker">Knowledge Gate</div><h2 class="section-title">Level quiz</h2><p class="sub">Score at least 3/5 to unlock the next level. You can retry without penalty.</p>
+<div class="questions" id="questions"></div><div class="quizresult" id="quizResult"></div><button class="btn" id="checkQuiz">Submit answers</button> <button class="btn alt" id="retryQuiz">Reset</button>
+</section>
+<section class="completebox glass hidden" id="completeBox">
+<div class="kicker">Level complete</div><h2 class="section-title">Excellent work, <span data-player=""></span>!</h2>
+<div class="stars" id="stars">☆☆☆</div><p class="sub" id="rewardText"></p>
+<div class="nextlinks"><a class="btn alt" href="../index.html">← Previous</a><a class="btn" href="level-02-origin-life.html" id="nextLevel">Next: Arrival of Life →</a></div>
+</section>
+</div>
+<aside class="sidecol">
+<section class="sidebox glass"><h3>🧠 Key facts</h3><ul class="facts"><li>Earth formed about 4.54 billion years ago.</li><li>Accretion means growth through repeated collisions and sticking.</li><li>Differentiation separated the core, mantle and crust.</li></ul></section>
+<section class="sidebox glass"><h3>🔑 Memory code</h3><div class="memory">N-D-A-D: Nebula → Disk → Accretion → Differentiation</div></section>
+<section class="sidebox glass"><h3>🗺️ Journey map</h3><div class="mapmini"><a class="mapdot" data-map="1" href="level-01-earth.html">1</a><a class="mapdot" data-map="2" href="level-02-origin-life.html">2</a><a class="mapdot" data-map="3" href="level-03-classification.html">3</a><a class="mapdot" data-map="4" href="level-04-cell.html">4</a><a class="mapdot" data-map="5" href="level-05-organelles.html">5</a><a class="mapdot" data-map="6" href="level-06-prok-euk.html">6</a><a class="mapdot" data-map="7" href="level-07-biomolecules.html">7</a><a class="mapdot" data-map="8" href="level-08-transport.html">8</a><a class="mapdot" data-map="9" href="level-09-respiration.html">9</a><a class="mapdot" data-map="10" href="level-10-photosynthesis.html">10</a><a class="mapdot" data-map="11" href="level-11-mitosis.html">11</a><a class="mapdot" data-map="12" href="level-12-meiosis.html">12</a><a class="mapdot" data-map="13" href="level-13-tissues.html">13</a><a class="mapdot" data-map="14" href="level-14-plants.html">14</a><a class="mapdot" data-map="15" href="level-15-body.html">15</a><a class="mapdot" data-map="16" href="level-16-organs-systems.html">16</a><a class="mapdot" data-map="17" href="level-17-homeostasis.html">17</a><a class="mapdot" data-map="18" href="level-18-evolution.html">18</a><a class="mapdot" data-map="19" href="level-19-ecology.html">19</a><a class="mapdot" data-map="20" href="level-20-future.html">20</a></div></section>
+<a class="deep" href="../The Begining &amp; Classification of Life on Earth/The Begining of Planet Earth.html">📚 Open the full detailed lesson →</a>
+<a class="deep" href="../library.html">🔎 Explore the complete knowledge library →</a>
+</aside>
+</div></main><div class="toast" id="toast"></div>
+<script>
+const STORE='lifeQuestPlayerV2';
+const LEVEL_COUNT=20;
+function loadPlayer(){try{return JSON.parse(localStorage.getItem(STORE))||null}catch(e){return null}}
+function savePlayer(p){localStorage.setItem(STORE,JSON.stringify(p))}
+function ensurePlayer(){const p=loadPlayer();if(!p){location.href='../index.html';throw new Error('No player')}return p}
+function todayKey(){return new Date().toISOString().slice(0,10)}
+function updateStreak(p){const t=todayKey();if(p.lastVisit===t)return;const y=new Date();y.setDate(y.getDate()-1);const ys=y.toISOString().slice(0,10);p.streak=p.lastVisit===ys?(p.streak||0)+1:1;p.lastVisit=t;savePlayer(p)}
+function toast(msg){const t=document.querySelector('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.__to);window.__to=setTimeout(()=>t.classList.remove('show'),2100)}
+let soundOn=localStorage.getItem('lifeQuestSound')!=='off';
+function beep(freq=520,d=.08,type='sine'){if(!soundOn)return;try{const A=new (window.AudioContext||window.webkitAudioContext)(),o=A.createOscillator(),g=A.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(.08,A.currentTime);g.gain.exponentialRampToValueAtTime(.001,A.currentTime+d);o.connect(g);g.connect(A.destination);o.start();o.stop(A.currentTime+d)}catch(e){}}
+function burst(x=innerWidth/2,y=innerHeight/2,n=22){for(let i=0;i<n;i++){const s=document.createElement('i');s.className='spark';s.style.left=x+'px';s.style.top=y+'px';s.style.background=['#ffd166','#4cc9f0','#55d6a8','#ff5d8f'][i%4];s.style.setProperty('--x',(Math.random()*240-120)+'px');s.style.setProperty('--y',(Math.random()*-190+45)+'px');document.body.appendChild(s);setTimeout(()=>s.remove(),900)}}
+function xpFloat(x,y,amount){const e=document.createElement('div');e.className='xpfloat';e.textContent='+'+amount+' XP';e.style.left=x+'px';e.style.top=y+'px';document.body.appendChild(e);setTimeout(()=>e.remove(),1300)}
+function setupSound(){const b=document.querySelector('#sound');if(!b)return;b.textContent=soundOn?'🔊':'🔇';b.onclick=()=>{soundOn=!soundOn;localStorage.setItem('lifeQuestSound',soundOn?'on':'off');b.textContent=soundOn?'🔊':'🔇';if(soundOn)beep(650)}}
+function fillStatus(p){document.querySelectorAll('[data-player]').forEach(e=>e.textContent=p.name);document.querySelectorAll('[data-avatar]').forEach(e=>e.textContent=p.avatar||'🧑‍🚀');document.querySelectorAll('[data-xp]').forEach(e=>e.textContent=p.xp||0);document.querySelectorAll('[data-coins]').forEach(e=>e.textContent=p.coins||0);document.querySelectorAll('[data-streak]').forEach(e=>e.textContent=p.streak||1)}
+
+const LEVEL={"id": 1, "slug": "earth", "title": "Birth of Planet Earth", "realm": "Cosmic Forge", "icon": "🌍", "color": "#ff7a45", "subtitle": "Travel 4.6 billion years into the past and build a planet from dust.", "deep": "The Begining & Classification of Life on Earth/The Begining of Planet Earth.html", "memory": "N-D-A-D: Nebula → Disk → Accretion → Differentiation"};
+const QUIZ=[["What force pulled the solar nebula inward?", ["Magnetism", "Gravity", "Friction", "Electric current"], 1], ["Accretion is the process of:", ["Cooling oceans", "Building by collisions", "Producing oxygen", "Breaking rocks"], 1], ["Which materials mainly moved toward Earth's centre?", ["Dense metals", "Light gases", "Liquid water", "Organic molecules"], 0], ["The young Earth cooled enough for water vapour to:", ["Burn", "Condense", "Ionise", "Disappear"], 1], ["Earth's approximate age is:", ["4.54 million years", "454 million years", "4.54 billion years", "13.8 billion years"], 2]];const MISSION={"type": "order", "title": "Planet Builder", "prompt": "Select the four events in the correct order.", "items": ["Solar nebula collapses", "Spinning disk forms", "Dust and rocks accrete", "Earth differentiates into layers"], "answer": [0, 1, 2, 3]};
+const player=ensurePlayer();updateStreak(player);fillStatus(player);setupSound();
+if(LEVEL.id>1 && !(player.completed||[]).includes(LEVEL.id-1)){toast('Complete the previous level first');setTimeout(()=>location.href='../index.html',1200)}
+let scene=0, storyDone=false, missionDone=(player.missions||[]).includes(LEVEL.id), quizPassed=(player.completed||[]).includes(LEVEL.id);
+const sceneEls=[...document.querySelectorAll('.scene')], dotEls=[...document.querySelectorAll('#dots i')];
+function showScene(n){scene=Math.max(0,Math.min(sceneEls.length-1,n));sceneEls.forEach((e,i)=>e.classList.toggle('active',i===scene));dotEls.forEach((e,i)=>e.classList.toggle('on',i===scene));document.querySelector('#sceneNow').textContent=scene+1;document.querySelector('#prevScene').disabled=scene===0;const nb=document.querySelector('#nextScene');nb.textContent=scene===sceneEls.length-1?'Unlock mission 🎮':'Next scene →';if(scene===sceneEls.length-1&&storyDone)nb.textContent='Mission unlocked ✓'}
+document.querySelector('#prevScene').onclick=()=>{beep(350);showScene(scene-1)};
+document.querySelector('#nextScene').onclick=e=>{beep(520);if(scene<sceneEls.length-1)showScene(scene+1);else{storyDone=true;document.querySelector('#missionBox').classList.add('unlocked');e.currentTarget.textContent='Mission unlocked ✓';burst(innerWidth*.72,innerHeight*.65,14);toast('Mini-game unlocked!');renderMission()}};
+showScene(0);
+
+let selectedCard=null, draggedCard=null, selectedOrder=[];
+function escapeHTML(v){return String(v).replace(/[&<>'\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','\"':'&quot;'}[c]))}
+function cardHTML(label,attrs=''){return `<button type="button" class="drag-card" draggable="true" ${attrs}>${escapeHTML(label)}</button>`}
+function activateCard(card){
+  document.querySelectorAll('#missionArea .drag-card.selected').forEach(x=>x.classList.remove('selected'));
+  selectedCard=card; card.classList.add('selected'); beep(470);
+}
+function clearCardMarks(){document.querySelectorAll('#missionArea .drag-card').forEach(c=>c.classList.remove('correct-card','wrong-card','selected'))}
+function wireDraggables(){
+  document.querySelectorAll('#missionArea .drag-card').forEach(card=>{
+    card.addEventListener('dragstart',e=>{draggedCard=card; e.dataTransfer.effectAllowed='move'; e.dataTransfer.setData('text/plain',card.dataset.key||card.textContent)});
+    card.addEventListener('dragend',()=>{draggedCard=null; document.querySelectorAll('.drag-over').forEach(z=>z.classList.remove('drag-over'))});
+    card.addEventListener('click',e=>{e.preventDefault(); activateCard(card)});
+  });
+  document.querySelectorAll('#missionArea [data-drop]').forEach(zone=>{
+    zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('drag-over')});
+    zone.addEventListener('dragleave',()=>zone.classList.remove('drag-over'));
+    zone.addEventListener('drop',e=>{e.preventDefault();zone.classList.remove('drag-over');if(draggedCard)placeCard(draggedCard,zone)});
+    zone.addEventListener('click',e=>{if(e.target.closest('.drag-card'))return;if(selectedCard)placeCard(selectedCard,zone)});
+  });
+}
+function placeCard(card,zone){
+  clearCardMarks();
+  if(MISSION.type==='choice'){
+    const old=zone.querySelector('.drag-card');
+    if(old && old!==card){const source=document.querySelector(`.choice-options[data-row="${zone.dataset.row}"]`); if(source)source.appendChild(old)}
+    if(card.dataset.row!==zone.dataset.row)return toast('Choose an answer from this question');
+    zone.appendChild(card);
+  }else if(MISSION.type==='match'){
+    const holder=zone.querySelector('.zone-items'); const old=holder.querySelector('.drag-card');
+    if(old&&old!==card)document.querySelector('#dragBank').appendChild(old); holder.appendChild(card);
+  }else if(MISSION.type==='sort'){
+    zone.querySelector('.zone-items').appendChild(card);
+  }else if(MISSION.type==='order'){
+    zone.appendChild(card); updateOrderPositions();
+  }
+  card.classList.remove('selected'); selectedCard=null; beep(610);
+}
+function updateOrderPositions(){document.querySelectorAll('#sequenceZone .drag-card').forEach((c,i)=>c.dataset.pos=i+1)}
+function renderMission(){
+  const area=document.querySelector('#missionArea'); area.innerHTML=''; selectedOrder=[]; selectedCard=null;
+  const help=`<div class="drag-help">🖱️ Drag cards with a mouse, or tap a card and then tap its destination. Complete every placement before checking.</div>`;
+  if(MISSION.type==='order'){
+    const shuffled=MISSION.items.map((x,i)=>({x,i})).sort(()=>Math.random()-.5);
+    area.innerHTML=help+`<div class="drag-bank" id="dragBank">${shuffled.map(o=>cardHTML(o.x,`data-key="${o.i}"`)).join('')}</div><div class="sequence-zone" id="sequenceZone" data-drop="order"></div><div class="mission-actions"><button type="button" class="btn alt" id="resetMission">↻ Reset order</button></div>`;
+  }else if(MISSION.type==='sort'){
+    const shuffled=MISSION.items.map((x,i)=>({x,i})).sort(()=>Math.random()-.5);
+    area.innerHTML=help+`<div class="drag-bank" id="dragBank">${shuffled.map(o=>cardHTML(o.x[0],`data-key="${o.i}" data-answer="${escapeHTML(o.x[1])}"`)).join('')}</div><div class="drop-grid">${MISSION.groups.map(g=>`<section class="drop-zone" data-drop="sort" data-group="${escapeHTML(g)}"><h4>${escapeHTML(g)}</h4><div class="zone-items"></div></section>`).join('')}</div><div class="mission-actions"><button type="button" class="btn alt" id="resetMission">↻ Reset clues</button></div>`;
+  }else if(MISSION.type==='match'){
+    const shuffled=MISSION.items.map((x,i)=>({x,i})).sort(()=>Math.random()-.5);
+    area.innerHTML=help+`<div class="drag-bank" id="dragBank">${shuffled.map(o=>cardHTML(o.x[0],`data-key="${o.i}" data-answer="${escapeHTML(o.x[1])}"`)).join('')}</div><div class="drop-grid">${MISSION.items.map((x,i)=>`<section class="drop-zone match-zone" data-drop="match" data-group="${escapeHTML(x[1])}"><p>${escapeHTML(x[1])}</p><div class="zone-items"></div></section>`).join('')}</div><div class="mission-actions"><button type="button" class="btn alt" id="resetMission">↻ Reset matches</button></div>`;
+  }else if(MISSION.type==='choice'){
+    area.innerHTML=help+`<div class="choice-mission">${MISSION.items.map((x,i)=>`<section class="choice-card"><h4>${escapeHTML(x[0])}</h4><div class="choice-options" data-row="${i}">${x[1].map((a,j)=>cardHTML(a,`data-row="${i}" data-value="${j}" data-key="${i}-${j}"`)).join('')}</div><div class="choice-target" data-drop="choice" data-row="${i}" data-answer="${x[2]}"></div></section>`).join('')}</div><div class="mission-actions"><button type="button" class="btn alt" id="resetMission">↻ Reset choices</button></div>`;
+  }
+  wireDraggables();
+  const reset=document.querySelector('#resetMission'); if(reset)reset.onclick=()=>{beep(330);renderMission();document.querySelector('#missionResult').textContent=''};
+}
+function missionCorrect(){
+  clearCardMarks(); let complete=true, correct=true;
+  if(MISSION.type==='order'){
+    const cards=[...document.querySelectorAll('#sequenceZone .drag-card')]; if(cards.length!==MISSION.items.length)return {complete:false,correct:false};
+    cards.forEach((c,i)=>{const ok=+c.dataset.key===MISSION.answer[i];c.classList.add(ok?'correct-card':'wrong-card');if(!ok)correct=false});
+  }else if(MISSION.type==='sort'||MISSION.type==='match'){
+    const cards=[...document.querySelectorAll('#missionArea .drag-card')]; cards.forEach(c=>{const z=c.closest('[data-group]');if(!z){complete=false;return}const ok=z.dataset.group===c.dataset.answer;c.classList.add(ok?'correct-card':'wrong-card');if(!ok)correct=false});
+  }else if(MISSION.type==='choice'){
+    document.querySelectorAll('.choice-target').forEach(z=>{const c=z.querySelector('.drag-card');if(!c){complete=false;return}const ok=+c.dataset.value===+z.dataset.answer;c.classList.add(ok?'correct-card':'wrong-card');if(!ok)correct=false});
+  }
+  return {complete,correct};
+}
+
+    document.querySelector('#checkMission').onclick=e=>{const result=missionCorrect();if(!result.complete){toast('Place every card before checking');document.querySelector('#missionResult').textContent='Complete all placements first.';document.querySelector('#missionResult').style.color='#ffd166';return}if(result.correct){missionDone=true;document.querySelector('#missionResult').textContent='✅ Mission complete! The Knowledge Gate is open.';document.querySelector('#missionResult').style.color='#55d6a8';document.querySelector('#quizBox').classList.add('unlocked');if(!(player.missions||[]).includes(LEVEL.id)){player.missions=player.missions||[];player.missions.push(LEVEL.id);player.xp=(player.xp||0)+50;player.coins=(player.coins||0)+10;savePlayer(player);fillStatus(player);xpFloat(e.clientX,e.clientY,50)}beep(760,.16);burst(e.clientX,e.clientY);renderQuiz();toast('Knowledge Gate unlocked')}else{document.querySelector('#missionResult').textContent='Not quite. Review the story and try again.';document.querySelector('#missionResult').style.color='#ff8799';beep(170,.16,'sawtooth')}};
+function renderQuiz(){
+ const box=document.querySelector('#questions');if(box.dataset.ready)return;
+ box.dataset.ready='1';box.className='quizgame';
+ window.quizState={index:0,score:0,locked:false,answered:false,answers:[]};
+ document.querySelector('#checkQuiz').textContent='Choose an answer first';
+ document.querySelector('#checkQuiz').disabled=true;
+ document.querySelector('#retryQuiz').textContent='Restart quiz';
+ drawQuizCard();
+}
+function drawQuizCard(){
+ const s=window.quizState,q=QUIZ[s.index],box=document.querySelector('#questions');
+ const pct=(s.index/QUIZ.length*100).toFixed(0);
+ box.innerHTML=`<div class="quizhud"><div><strong>Question ${s.index+1} of ${QUIZ.length}</strong><div class="progressline" style="margin-top:8px"><span style="width:${pct}%"></span></div></div><div class="quizscore"><span>✅ ${s.score}</span><span>🔥 Streak ${currentStreak()}</span><span>⭐ Goal 3/5</span></div></div><div class="quizcard"><h4>${q[0]}</h4><div class="answercards">${q[1].map((a,j)=>`<button class="answercard" data-v="${j}"><b>${String.fromCharCode(65+j)}</b><span>${a}</span></button>`).join('')}</div><div class="feedbackbox" id="feedbackBox">Select the best answer. You will get instant feedback.</div></div>`;
+ s.locked=false;s.answered=false;
+ document.querySelector('#checkQuiz').textContent='Choose an answer first';
+ document.querySelector('#checkQuiz').disabled=true;
+ document.querySelectorAll('.answercard').forEach(btn=>btn.onclick=()=>chooseAnswer(btn));
+}
+function currentStreak(){
+ const a=(window.quizState&&window.quizState.answers)||[];let n=0;for(let i=a.length-1;i>=0&&a[i];i--)n++;return n;
+}
+function chooseAnswer(btn){
+ const s=window.quizState;if(s.locked)return;
+ s.locked=true;s.answered=true;
+ const chosen=+btn.dataset.v,q=QUIZ[s.index],correct=+q[2],ok=chosen===correct;
+ if(ok)s.score++;s.answers.push(ok);
+ document.querySelectorAll('.answercard').forEach(b=>{b.disabled=true;const v=+b.dataset.v;if(v===correct)b.classList.add('correct');else if(v===chosen)b.classList.add('wrong');else b.classList.add('dim')});
+ const fb=document.querySelector('#feedbackBox');fb.className='feedbackbox '+(ok?'good':'bad');fb.innerHTML=ok?'✅ Correct! Your knowledge streak is growing.':`❌ Not correct. Correct answer: <b>${q[1][correct]}</b>`;
+ document.querySelector('#checkQuiz').disabled=false;
+ document.querySelector('#checkQuiz').textContent=s.index===QUIZ.length-1?'See final result →':'Next question →';
+ beep(ok?780:180,.16,ok?'sine':'sawtooth');
+ if(ok)burst(btn.getBoundingClientRect().left+20,btn.getBoundingClientRect().top+20,12);
+}
+document.querySelector('#checkQuiz').onclick=e=>{
+ const s=window.quizState;if(!s||!s.answered)return toast('Choose one answer first');
+ if(s.index<QUIZ.length-1){s.index++;drawQuizCard();beep(520);return}
+ showQuizFinal(e);
+};
+function showQuizFinal(e){
+ const s=window.quizState,score=s.score,passed=score>=3,box=document.querySelector('#questions');
+ box.innerHTML=`<div class="quizfinal"><div class="kicker">${passed?'Knowledge Gate Open':'Try Again'}</div><div class="scorebig">${score}/5</div><h3>${passed?'Great job! Level completed.':'Almost there. Revise and replay.'}</h3><p class="sub">${passed?'You proved your understanding and unlocked the next step.':'You need at least 3 correct answers to pass this level.'}</p></div>`;
+ document.querySelector('#quizResult').textContent=passed?`Score: ${score}/5 · Passed`:`Score: ${score}/5 · Need ${3-score} more correct answer(s).`;
+ document.querySelector('#checkQuiz').disabled=true;
+ document.querySelector('#checkQuiz').textContent=passed?'Completed ✓':'Restart quiz to retry';
+ if(passed)completeLevel(score,e);else{beep(180,.18,'sawtooth');toast('Review and try again')}
+}
+document.querySelector('#retryQuiz').onclick=()=>{
+ window.quizState={index:0,score:0,locked:false,answered:false,answers:[]};
+ document.querySelector('#quizResult').textContent='';
+ document.querySelector('#checkQuiz').disabled=true;
+ document.querySelector('#checkQuiz').textContent='Choose an answer first';
+ drawQuizCard();
+};
+function completeLevel(score,e){
+ const first=!(player.completed||[]).includes(LEVEL.id),old=(player.scores||{})[LEVEL.id]||0,improve=Math.max(0,score-old),stars=score===5?3:score===4?2:1;
+ player.completed=player.completed||[];if(first)player.completed.push(LEVEL.id);
+ player.scores=player.scores||{};player.scores[LEVEL.id]=Math.max(old,score);
+ player.stars=player.stars||{};player.stars[LEVEL.id]=Math.max(player.stars[LEVEL.id]||0,stars);
+ const reward=(first?100:0)+improve*20;if(reward)player.xp=(player.xp||0)+reward;if(first)player.coins=(player.coins||0)+20;
+ player.badges=player.badges||[];
+ const badges={1:'first-spark',6:'cell-scout',12:'division-master',16:'body-architect',20:'life-voyager'};if(badges[LEVEL.id]&&!player.badges.includes(badges[LEVEL.id]))player.badges.push(badges[LEVEL.id]);if(score===5&&!player.badges.includes('perfect-mind'))player.badges.push('perfect-mind');
+ savePlayer(player);fillStatus(player);document.querySelector('#completeBox').classList.remove('hidden');document.querySelector('#stars').textContent='★'.repeat(stars)+'☆'.repeat(3-stars);document.querySelector('#rewardText').textContent=`${score}/5 correct · ${reward} XP earned · Level ${LEVEL.id} unlocked in your record.`;document.querySelector('#completeBox').scrollIntoView({behavior:'smooth'});beep(880,.25);burst(innerWidth/2,innerHeight/2,45);toast(first?'New level completed!':'Best score updated!');if(reward)xpFloat(innerWidth/2,innerHeight*.72,reward);refreshMap();
+}
+function refreshMap(){document.querySelectorAll('[data-map]').forEach(a=>{const n=+a.dataset.map;a.classList.toggle('done',(player.completed||[]).includes(n));a.classList.toggle('current',n===LEVEL.id);const isLocked=n>1&&!(player.completed||[]).includes(n-1);a.classList.toggle('locked',isLocked);a.setAttribute('aria-disabled',isLocked?'true':'false');a.tabIndex=isLocked?-1:0})}
+refreshMap();
+if(missionDone){storyDone=true;document.querySelector('#missionBox').classList.add('unlocked');renderMission();document.querySelector('#quizBox').classList.add('unlocked');renderQuiz()}
+if(quizPassed){const score=(player.scores||{})[LEVEL.id]||3,stars=(player.stars||{})[LEVEL.id]||1;document.querySelector('#completeBox').classList.remove('hidden');document.querySelector('#stars').textContent='★'.repeat(stars)+'☆'.repeat(3-stars);document.querySelector('#rewardText').textContent=`Best score: ${score}/5 · Replay to improve your score.`}
+</script></body></html>
