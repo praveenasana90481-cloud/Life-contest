@@ -1438,7 +1438,8 @@
         /* Opening logo animation */
         .intro-splash{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;background:radial-gradient(circle at 50% 42%,rgba(180,35,24,.10),transparent 34%),linear-gradient(145deg,#fff,#f5f8fc);opacity:1;visibility:visible;transition:opacity .8s ease,visibility .8s ease}
         body.dark .intro-splash{background:radial-gradient(circle at 50% 42%,rgba(244,180,0,.10),transparent 34%),linear-gradient(145deg,#101722,#172131)}
-        .intro-splash img{width:min(620px,82vw);max-height:68vh;object-fit:contain;filter:drop-shadow(0 24px 55px rgba(23,32,51,.18));transform-origin:center;will-change:transform,opacity}
+        .intro-splash img {
+            width: min(980px, 94vw);max-height:68vh;object-fit:contain;filter:drop-shadow(0 24px 55px rgba(23,32,51,.18));transform-origin:center;will-change:transform,opacity}
         .intro-splash.shrink img{animation:logoToCorner 1.8s cubic-bezier(.22,.8,.24,1) forwards}
         .intro-splash.done{opacity:0;visibility:hidden;pointer-events:none}
         @keyframes logoToCorner{0%{transform:translate(0,0) scale(1);opacity:1}72%{transform:translate(calc(-50vw + 82px),calc(-50vh + 58px)) scale(.15);opacity:1}100%{transform:translate(calc(-50vw + 82px),calc(-50vh + 58px)) scale(.08);opacity:0}}
