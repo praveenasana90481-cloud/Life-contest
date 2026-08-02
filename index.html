@@ -1,101 +1,1378 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/>
-<meta content="A story-based biology learning game from the birth of Earth to future evolution." name="description"/><meta content="#07111f" name="theme-color"/>
-<title>The Life Quest | Interactive Biology Adventure</title><style>
-:root{--bg:#07111f;--panel:#101f35;--panel2:#142945;--text:#eef7ff;--muted:#9cb4cc;--gold:#ffd166;--cyan:#4cc9f0;--green:#55d6a8;--danger:#ff5d73;--line:rgba(255,255,255,.11);--shadow:0 22px 70px rgba(0,0,0,.38);--radius:24px}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--text);font-family:Inter,ui-rounded,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;background:radial-gradient(circle at 10% 0%,#17345a 0,transparent 34%),radial-gradient(circle at 90% 10%,#291d58 0,transparent 30%),linear-gradient(150deg,#050b14,#08172a 50%,#07111f);overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.25;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:33px 33px;mask-image:linear-gradient(#000,transparent 90%)}button,input,select{font:inherit}a{color:inherit}.hidden{display:none!important}.gamebar{position:sticky;top:0;z-index:1000;display:flex;align-items:center;gap:12px;padding:12px clamp(14px,3vw,32px);background:rgba(5,11,20,.83);backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}.logo{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:950;letter-spacing:.02em}.logo i{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#4cc9f0,#7950f2);font-style:normal;box-shadow:0 0 28px rgba(76,201,240,.35)}.status{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.pill{display:flex;align-items:center;gap:6px;border:1px solid var(--line);background:rgba(255,255,255,.055);padding:7px 10px;border-radius:999px;font-size:.82rem;font-weight:850}.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#203a61;border:2px solid rgba(255,255,255,.18)}.sound{border:1px solid var(--line);background:#142945;color:#fff;width:38px;height:38px;border-radius:12px;cursor:pointer}.shell{max-width:1220px;margin:auto;padding:clamp(20px,4vw,46px) clamp(14px,3vw,28px) 80px}.glass{background:linear-gradient(145deg,rgba(20,41,69,.92),rgba(12,27,47,.94));border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}.btn{border:0;border-radius:14px;padding:12px 17px;font-weight:950;cursor:pointer;color:#091422;background:linear-gradient(135deg,var(--gold),#ff9f1c);box-shadow:0 10px 25px rgba(255,184,0,.22);transition:.2s}.btn:hover{transform:translateY(-2px)}.btn.alt{color:#fff;background:#173557;border:1px solid rgba(255,255,255,.14);box-shadow:none}.btn.good{background:linear-gradient(135deg,#55d6a8,#1fbf8f)}.btn.danger{background:linear-gradient(135deg,#ff758f,#ff4d6d);color:#fff}.section-title{margin:0 0 8px;font-size:clamp(1.5rem,3vw,2.35rem)}.sub{color:var(--muted);margin:0}.progressline{height:12px;border-radius:99px;background:#081321;border:1px solid var(--line);overflow:hidden}.progressline span{display:block;height:100%;width:0;background:linear-gradient(90deg,#4cc9f0,#55d6a8,#ffd166);transition:width .5s}.spark{position:fixed;width:9px;height:9px;border-radius:50%;pointer-events:none;z-index:9999;animation:fly .85s ease-out forwards}@keyframes fly{to{transform:translate(var(--x),var(--y)) rotate(500deg);opacity:0}}.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,120px);background:#fff;color:#0a1320;padding:12px 18px;border-radius:14px;font-weight:900;z-index:9999;transition:.3s;box-shadow:var(--shadow)}.toast.show{transform:translate(-50%,0)}.xpfloat{position:fixed;z-index:9999;font-weight:1000;color:var(--gold);animation:xp 1.2s forwards;pointer-events:none}@keyframes xp{to{transform:translateY(-70px) scale(1.3);opacity:0}}@media(max-width:700px){.logo span{display:none}.pill.namepill{display:none}.status{gap:5px}.pill{padding:6px 8px}.gamebar{padding:9px 10px}}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width,initial-scale=1" name="viewport" />
+    <meta
+      content="A story-based biology learning game from the birth of Earth to future evolution."
+      name="description"
+    />
+    <meta content="#07111f" name="theme-color" />
+    <title>The Life Quest | Interactive Biology Adventure</title>
+    <style>
+      :root {
+        --bg: #07111f;
+        --panel: #101f35;
+        --panel2: #142945;
+        --text: #eef7ff;
+        --muted: #9cb4cc;
+        --gold: #ffd166;
+        --cyan: #4cc9f0;
+        --green: #55d6a8;
+        --danger: #ff5d73;
+        --line: rgba(255, 255, 255, 0.11);
+        --shadow: 0 22px 70px rgba(0, 0, 0, 0.38);
+        --radius: 24px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--text);
+        font-family:
+          Inter,
+          ui-rounded,
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Arial,
+          sans-serif;
+        background:
+          radial-gradient(circle at 10% 0%, #17345a 0, transparent 34%),
+          radial-gradient(circle at 90% 10%, #291d58 0, transparent 30%),
+          linear-gradient(150deg, #050b14, #08172a 50%, #07111f);
+        overflow-x: hidden;
+      }
+      body:before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.25;
+        background-image: radial-gradient(#fff 1px, transparent 1px);
+        background-size: 33px 33px;
+        mask-image: linear-gradient(#000, transparent 90%);
+      }
+      button,
+      input,
+      select {
+        font: inherit;
+      }
+      a {
+        color: inherit;
+      }
+      .hidden {
+        display: none !important;
+      }
+      .gamebar {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px clamp(14px, 3vw, 32px);
+        background: rgba(5, 11, 20, 0.83);
+        backdrop-filter: blur(18px);
+        border-bottom: 1px solid var(--line);
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        font-weight: 950;
+        letter-spacing: 0.02em;
+      }
+      .logo i {
+        width: 42px;
+        height: 42px;
+        border-radius: 14px;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, #4cc9f0, #7950f2);
+        font-style: normal;
+        box-shadow: 0 0 28px rgba(76, 201, 240, 0.35);
+      }
+      .status {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .pill {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.055);
+        padding: 7px 10px;
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 850;
+      }
+      .avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: #203a61;
+        border: 2px solid rgba(255, 255, 255, 0.18);
+      }
+      .sound {
+        border: 1px solid var(--line);
+        background: #142945;
+        color: #fff;
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        cursor: pointer;
+      }
+      .shell {
+        max-width: 1220px;
+        margin: auto;
+        padding: clamp(20px, 4vw, 46px) clamp(14px, 3vw, 28px) 80px;
+      }
+      .glass {
+        background: linear-gradient(
+          145deg,
+          rgba(20, 41, 69, 0.92),
+          rgba(12, 27, 47, 0.94)
+        );
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+      }
+      .btn {
+        border: 0;
+        border-radius: 14px;
+        padding: 12px 17px;
+        font-weight: 950;
+        cursor: pointer;
+        color: #091422;
+        background: linear-gradient(135deg, var(--gold), #ff9f1c);
+        box-shadow: 0 10px 25px rgba(255, 184, 0, 0.22);
+        transition: 0.2s;
+      }
+      .btn:hover {
+        transform: translateY(-2px);
+      }
+      .btn.alt {
+        color: #fff;
+        background: #173557;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        box-shadow: none;
+      }
+      .btn.good {
+        background: linear-gradient(135deg, #55d6a8, #1fbf8f);
+      }
+      .btn.danger {
+        background: linear-gradient(135deg, #ff758f, #ff4d6d);
+        color: #fff;
+      }
+      .section-title {
+        margin: 0 0 8px;
+        font-size: clamp(1.5rem, 3vw, 2.35rem);
+      }
+      .sub {
+        color: var(--muted);
+        margin: 0;
+      }
+      .progressline {
+        height: 12px;
+        border-radius: 99px;
+        background: #081321;
+        border: 1px solid var(--line);
+        overflow: hidden;
+      }
+      .progressline span {
+        display: block;
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, #4cc9f0, #55d6a8, #ffd166);
+        transition: width 0.5s;
+      }
+      .spark {
+        position: fixed;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        animation: fly 0.85s ease-out forwards;
+      }
+      @keyframes fly {
+        to {
+          transform: translate(var(--x), var(--y)) rotate(500deg);
+          opacity: 0;
+        }
+      }
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 25px;
+        transform: translate(-50%, 120px);
+        background: #fff;
+        color: #0a1320;
+        padding: 12px 18px;
+        border-radius: 14px;
+        font-weight: 900;
+        z-index: 9999;
+        transition: 0.3s;
+        box-shadow: var(--shadow);
+      }
+      .toast.show {
+        transform: translate(-50%, 0);
+      }
+      .xpfloat {
+        position: fixed;
+        z-index: 9999;
+        font-weight: 1000;
+        color: var(--gold);
+        animation: xp 1.2s forwards;
+        pointer-events: none;
+      }
+      @keyframes xp {
+        to {
+          transform: translateY(-70px) scale(1.3);
+          opacity: 0;
+        }
+      }
+      @media (max-width: 700px) {
+        .logo span {
+          display: none;
+        }
+        .pill.namepill {
+          display: none;
+        }
+        .status {
+          gap: 5px;
+        }
+        .pill {
+          padding: 6px 8px;
+        }
+        .gamebar {
+          padding: 9px 10px;
+        }
+      }
 
-.onboard{position:fixed;inset:0;z-index:5000;display:grid;place-items:center;padding:18px;background:radial-gradient(circle at 20% 10%,#1a4a78,transparent 32%),radial-gradient(circle at 85% 75%,#412978,transparent 35%),#050b14}.oncard{max-width:700px;width:100%;padding:clamp(24px,5vw,52px);text-align:center}.planet{width:150px;height:150px;margin:auto;border-radius:50%;display:grid;place-items:center;font-size:78px;background:radial-gradient(circle at 34% 28%,#88e1ff,#2379bd 35%,#14526f 58%,#0c263f 70%);box-shadow:inset -25px -18px 40px rgba(0,0,0,.45),0 0 60px rgba(76,201,240,.35);animation:planet 7s linear infinite}@keyframes planet{50%{transform:translateY(-10px) rotate(8deg)}}.oncard h1{font-size:clamp(2.3rem,7vw,5rem);line-height:.96;margin:24px 0 12px}.oncard p{color:#bdd0e3}.nameinput{width:min(100%,420px);padding:15px 17px;border-radius:15px;border:1px solid rgba(255,255,255,.17);background:#091a2e;color:#fff;text-align:center;font-size:1.1rem;font-weight:850;outline:none}.nameinput:focus{border-color:#4cc9f0;box-shadow:0 0 0 4px rgba(76,201,240,.13)}.avatarpick{display:flex;justify-content:center;gap:10px;margin:16px 0}.avatarpick button{width:58px;height:58px;border-radius:18px;border:1px solid var(--line);background:#10243d;font-size:28px;cursor:pointer}.avatarpick button.on{outline:3px solid var(--gold);background:#1d3b60}.intro{position:fixed;inset:0;z-index:4500;background:#030811;display:none;place-items:center;text-align:center;padding:25px}.intro.show{display:grid}.introframe{display:none;max-width:820px;animation:introIn 1s}.introframe.on{display:block}@keyframes introIn{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}.introframe .big{font-size:clamp(4rem,13vw,9rem)}.introframe h2{font-size:clamp(2rem,6vw,4.7rem);line-height:1.02;margin:16px 0}.introframe p{font-size:clamp(1rem,2.3vw,1.3rem);color:#b8ccdf}.skipintro{position:fixed;right:18px;top:18px;z-index:10}.dashhero{padding:clamp(28px,6vw,64px);position:relative;overflow:hidden;background:radial-gradient(circle at 83% 22%,rgba(76,201,240,.25),transparent 27%),radial-gradient(circle at 73% 70%,rgba(255,209,102,.13),transparent 30%),linear-gradient(135deg,#142e51,#0a1729)}.dashhero:after{content:"🧬";position:absolute;right:6%;top:8%;font-size:clamp(6rem,18vw,13rem);opacity:.7;filter:drop-shadow(0 20px 25px rgba(0,0,0,.35));animation:float 4s ease-in-out infinite}.dashhero>*{position:relative;z-index:1}.dashhero h1{font-size:clamp(2.5rem,7vw,5.6rem);line-height:.96;letter-spacing:-.055em;margin:10px 0;max-width:800px}.dashhero p{color:#c4d8ea;max-width:680px;font-size:1.08rem}.dashactions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.dashboard{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:22px;margin-top:22px}.worldmap{padding:clamp(18px,3vw,30px)}.levels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:20px}.levelcard{position:relative;overflow:hidden;min-height:145px;padding:17px;border-radius:19px;border:1px solid var(--line);background:linear-gradient(145deg,#132b49,#0b1a2d);text-decoration:none;transition:.2s}.levelcard:hover{transform:translateY(-3px);border-color:var(--c)}.levelcard .num{font-size:.72rem;color:var(--muted);font-weight:950;text-transform:uppercase;letter-spacing:.08em}.levelcard .ico{position:absolute;right:12px;top:8px;font-size:47px;opacity:.82}.levelcard h3{margin:24px 0 5px;font-size:1.05rem}.levelcard small{color:var(--muted)}.levelcard.done{background:linear-gradient(145deg,rgba(23,117,88,.78),#0b2a2a)}.levelcard.current{outline:2px solid var(--gold);box-shadow:0 0 30px rgba(255,209,102,.13)}.levelcard.locked{filter:saturate(.25);opacity:.52;pointer-events:none}.levelcard.locked:after{content:"🔒";position:absolute;inset:0;display:grid;place-items:center;font-size:34px;background:rgba(3,9,17,.38)}.sidebarcards{display:grid;gap:16px;align-content:start}.profilecard,.badgecard,.tips{padding:20px}.bigavatar{width:82px;height:82px;border-radius:27px;display:grid;place-items:center;font-size:42px;background:linear-gradient(145deg,#294f7f,#172e4d);border:2px solid var(--line);margin-bottom:12px}.statgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:15px}.mini{background:#09192b;border:1px solid var(--line);border-radius:13px;padding:11px}.mini strong{display:block;color:var(--gold);font-size:1.25rem}.mini span{font-size:.72rem;color:var(--muted)}.badges{display:flex;gap:8px;flex-wrap:wrap}.badge{width:48px;height:48px;border-radius:15px;display:grid;place-items:center;background:#0a192a;border:1px solid var(--line);font-size:25px;filter:grayscale(1);opacity:.35}.badge.earned{filter:none;opacity:1;background:#233b59;box-shadow:0 0 18px rgba(255,209,102,.13)}@media(max-width:900px){.dashboard{grid-template-columns:1fr}.sidebarcards{grid-template-columns:repeat(2,1fr)}}@media(max-width:650px){.levels{grid-template-columns:1fr}.sidebarcards{grid-template-columns:1fr}.dashhero:after{opacity:.3}.oncard{padding:23px}.planet{width:112px;height:112px;font-size:58px}}
+      .onboard {
+        position: fixed;
+        inset: 0;
+        z-index: 5000;
+        display: grid;
+        place-items: center;
+        padding: 18px;
+        background:
+          radial-gradient(circle at 20% 10%, #1a4a78, transparent 32%),
+          radial-gradient(circle at 85% 75%, #412978, transparent 35%), #050b14;
+      }
+      .oncard {
+        max-width: 700px;
+        width: 100%;
+        padding: clamp(24px, 5vw, 52px);
+        text-align: center;
+      }
+      .planet {
+        width: 150px;
+        height: 150px;
+        margin: auto;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        font-size: 78px;
+        background: radial-gradient(
+          circle at 34% 28%,
+          #88e1ff,
+          #2379bd 35%,
+          #14526f 58%,
+          #0c263f 70%
+        );
+        box-shadow:
+          inset -25px -18px 40px rgba(0, 0, 0, 0.45),
+          0 0 60px rgba(76, 201, 240, 0.35);
+        animation: planet 7s linear infinite;
+      }
+      @keyframes planet {
+        50% {
+          transform: translateY(-10px) rotate(8deg);
+        }
+      }
+      .oncard h1 {
+        font-size: clamp(2.3rem, 7vw, 5rem);
+        line-height: 0.96;
+        margin: 24px 0 12px;
+      }
+      .oncard p {
+        color: #bdd0e3;
+      }
+      .nameinput {
+        width: min(100%, 420px);
+        padding: 15px 17px;
+        border-radius: 15px;
+        border: 1px solid rgba(255, 255, 255, 0.17);
+        background: #091a2e;
+        color: #fff;
+        text-align: center;
+        font-size: 1.1rem;
+        font-weight: 850;
+        outline: none;
+      }
+      .nameinput:focus {
+        border-color: #4cc9f0;
+        box-shadow: 0 0 0 4px rgba(76, 201, 240, 0.13);
+      }
+      .avatarpick {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin: 16px 0;
+      }
+      .avatarpick button {
+        width: 58px;
+        height: 58px;
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        background: #10243d;
+        font-size: 28px;
+        cursor: pointer;
+      }
+      .avatarpick button.on {
+        outline: 3px solid var(--gold);
+        background: #1d3b60;
+      }
+      .intro {
+        position: fixed;
+        inset: 0;
+        z-index: 4500;
+        background: #030811;
+        display: none;
+        place-items: center;
+        text-align: center;
+        padding: 25px;
+      }
+      .intro.show {
+        display: grid;
+      }
+      .introframe {
+        display: none;
+        max-width: 820px;
+        animation: introIn 1s;
+      }
+      .introframe.on {
+        display: block;
+      }
+      @keyframes introIn {
+        from {
+          opacity: 0;
+          transform: scale(0.92);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .introframe .big {
+        font-size: clamp(4rem, 13vw, 9rem);
+      }
+      .introframe h2 {
+        font-size: clamp(2rem, 6vw, 4.7rem);
+        line-height: 1.02;
+        margin: 16px 0;
+      }
+      .introframe p {
+        font-size: clamp(1rem, 2.3vw, 1.3rem);
+        color: #b8ccdf;
+      }
+      .skipintro {
+        position: fixed;
+        right: 18px;
+        top: 18px;
+        z-index: 10;
+      }
+      .dashhero {
+        padding: clamp(28px, 6vw, 64px);
+        position: relative;
+        overflow: hidden;
+        background:
+          radial-gradient(
+            circle at 83% 22%,
+            rgba(76, 201, 240, 0.25),
+            transparent 27%
+          ),
+          radial-gradient(
+            circle at 73% 70%,
+            rgba(255, 209, 102, 0.13),
+            transparent 30%
+          ),
+          linear-gradient(135deg, #142e51, #0a1729);
+      }
+      .dashhero:after {
+        content: "🧬";
+        position: absolute;
+        right: 6%;
+        top: 8%;
+        font-size: clamp(6rem, 18vw, 13rem);
+        opacity: 0.7;
+        filter: drop-shadow(0 20px 25px rgba(0, 0, 0, 0.35));
+        animation: float 4s ease-in-out infinite;
+      }
+      .dashhero > * {
+        position: relative;
+        z-index: 1;
+      }
+      .dashhero h1 {
+        font-size: clamp(2.5rem, 7vw, 5.6rem);
+        line-height: 0.96;
+        letter-spacing: -0.055em;
+        margin: 10px 0;
+        max-width: 800px;
+      }
+      .dashhero p {
+        color: #c4d8ea;
+        max-width: 680px;
+        font-size: 1.08rem;
+      }
+      .dashactions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 22px;
+      }
+      .dashboard {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 310px;
+        gap: 22px;
+        margin-top: 22px;
+      }
+      .worldmap {
+        padding: clamp(18px, 3vw, 30px);
+      }
+      .levels {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 13px;
+        margin-top: 20px;
+      }
+      .levelcard {
+        position: relative;
+        overflow: hidden;
+        min-height: 145px;
+        padding: 17px;
+        border-radius: 19px;
+        border: 1px solid var(--line);
+        background: linear-gradient(145deg, #132b49, #0b1a2d);
+        text-decoration: none;
+        transition: 0.2s;
+      }
+      .levelcard:hover {
+        transform: translateY(-3px);
+        border-color: var(--c);
+      }
+      .levelcard .num {
+        font-size: 0.72rem;
+        color: var(--muted);
+        font-weight: 950;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+      .levelcard .ico {
+        position: absolute;
+        right: 12px;
+        top: 8px;
+        font-size: 47px;
+        opacity: 0.82;
+      }
+      .levelcard h3 {
+        margin: 24px 0 5px;
+        font-size: 1.05rem;
+      }
+      .levelcard small {
+        color: var(--muted);
+      }
+      .levelcard.done {
+        background: linear-gradient(145deg, rgba(23, 117, 88, 0.78), #0b2a2a);
+      }
+      .levelcard.current {
+        outline: 2px solid var(--gold);
+        box-shadow: 0 0 30px rgba(255, 209, 102, 0.13);
+      }
+      .levelcard.locked {
+        filter: saturate(0.25);
+        opacity: 0.52;
+        pointer-events: none;
+      }
+      .levelcard.locked:after {
+        content: "🔒";
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        font-size: 34px;
+        background: rgba(3, 9, 17, 0.38);
+      }
+      .sidebarcards {
+        display: grid;
+        gap: 16px;
+        align-content: start;
+      }
+      .profilecard,
+      .badgecard,
+      .tips {
+        padding: 20px;
+      }
+      .bigavatar {
+        width: 82px;
+        height: 82px;
+        border-radius: 27px;
+        display: grid;
+        place-items: center;
+        font-size: 42px;
+        background: linear-gradient(145deg, #294f7f, #172e4d);
+        border: 2px solid var(--line);
+        margin-bottom: 12px;
+      }
+      .statgrid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 9px;
+        margin-top: 15px;
+      }
+      .mini {
+        background: #09192b;
+        border: 1px solid var(--line);
+        border-radius: 13px;
+        padding: 11px;
+      }
+      .mini strong {
+        display: block;
+        color: var(--gold);
+        font-size: 1.25rem;
+      }
+      .mini span {
+        font-size: 0.72rem;
+        color: var(--muted);
+      }
+      .badges {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .badge {
+        width: 48px;
+        height: 48px;
+        border-radius: 15px;
+        display: grid;
+        place-items: center;
+        background: #0a192a;
+        border: 1px solid var(--line);
+        font-size: 25px;
+        filter: grayscale(1);
+        opacity: 0.35;
+      }
+      .badge.earned {
+        filter: none;
+        opacity: 1;
+        background: #233b59;
+        box-shadow: 0 0 18px rgba(255, 209, 102, 0.13);
+      }
+      @media (max-width: 900px) {
+        .dashboard {
+          grid-template-columns: 1fr;
+        }
+        .sidebarcards {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 650px) {
+        .levels {
+          grid-template-columns: 1fr;
+        }
+        .sidebarcards {
+          grid-template-columns: 1fr;
+        }
+        .dashhero:after {
+          opacity: 0.3;
+        }
+        .oncard {
+          padding: 23px;
+        }
+        .planet {
+          width: 112px;
+          height: 112px;
+          font-size: 58px;
+        }
+      }
 
-.home-visuals{margin-top:22px;padding:18px}.home-visual-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.home-visual-grid img{width:100%;height:150px;object-fit:cover;border-radius:15px;border:1px solid var(--line);background:#08182b}.home-visual-grid figure{margin:0}.home-visual-grid figcaption{font-size:.78rem;color:var(--muted);padding:7px 2px}@media(max-width:800px){.home-visual-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:480px){.home-visual-grid{grid-template-columns:1fr}.home-visual-grid img{height:210px}}
-</style></head><body>
-<div class="onboard" id="onboard">
-<section class="oncard glass"><div class="planet">🌍</div><div class="kicker">Interactive biology adventure</div><h1>Welcome to<br/>The Life Quest</h1>
-<p>Enter your name and choose an explorer. Your personalised journey will begin at the birth of Planet Earth.</p>
-<input autocomplete="name" class="nameinput" id="nameInput" maxlength="24" placeholder="Type your name"/>
-<div class="avatarpick" id="avatarPick"><button class="on" data-a="🧑‍🚀">🧑‍🚀</button><button data-a="🧑‍🔬">🧑‍🔬</button><button data-a="🕵️">🕵️</button><button data-a="🧙">🧙</button></div>
-<button class="btn" id="begin">Begin my adventure →</button></section></div>
-<div class="intro" id="intro"><button class="btn alt skipintro" id="skipIntro">Skip intro</button><div class="introframe on" data-frame="0"><div class="big">🌌</div><h2>Before there were forests, animals or people…</h2><p>there was a cloud of gas and dust drifting through space.</p></div><div class="introframe" data-frame="1"><div class="big">🌍</div><h2>Gravity built a planet.</h2><p>Fire, collisions, cooling oceans and chemistry prepared a home for life.</p></div><div class="introframe" data-frame="2"><div class="big">🧬</div><h2>Then chemistry learned to copy itself.</h2><p>Cells, tissues, organisms and ecosystems filled Earth with diversity.</p></div><div class="introframe" data-frame="3"><div class="big">🚀</div><h2>Your mission begins now.</h2><p>Learn the story, win each challenge and unlock the complete Journey of Life.</p></div></div>
-<header class="gamebar">
-<a class="logo" href="index.html"><i>🧬</i><span>The Life Quest</span></a>
-<div class="status">
-<div class="pill namepill"><span class="avatar" data-avatar="">🧑‍🚀</span><span data-player="">Explorer</span></div>
-<div class="pill">⚡ <span data-xp="">0</span> XP</div>
-<div class="pill">🪙 <span data-coins="">0</span></div>
-<div class="pill">🔥 <span data-streak="">1</span></div>
-<button aria-label="Toggle sound" class="sound" id="sound">🔊</button>
-</div></header>
-<main class="shell">
-<section class="dashhero glass"><div class="kicker">Your biology campaign</div><h1>Welcome back, <span data-player="">Explorer</span>.</h1>
-<p>Follow life’s story in order. Every level teaches a new idea, then challenges you with a mini-game and quiz. Earn XP, coins, stars and badges as you progress.</p>
-<div class="dashactions"><a class="btn" href="Adventure/level-01-earth.html" id="continueBtn">Continue journey →</a><a class="btn alt" href="library.html">Open knowledge library</a><button class="btn alt" id="resetPlayer">Change player</button></div>
-</section><section class="home-visuals glass"><h2 class="section-title">A visual journey through life</h2><p class="sub">Your original biology diagrams now appear throughout the Adventure levels.</p><div class="home-visual-grid" style="margin-top:14px"><figure><img alt="Origins" loading="lazy" src="Adventure/game-images/origin-ocean.jpg"/><figcaption>Origins</figcaption></figure><figure><img alt="Cells" loading="lazy" src="Adventure/game-images/nucleus.jpg"/><figcaption>Cells</figcaption></figure><figure><img alt="Body systems" loading="lazy" src="Adventure/game-images/body-systems-collage.jpg"/><figcaption>Body systems</figcaption></figure><figure><img alt="Future evolution" loading="lazy" src="Adventure/game-images/future-human.jpg"/><figcaption>Future evolution</figcaption></figure></div></section>
-<div class="dashboard">
-<section class="worldmap glass"><div class="kicker">20-level world map</div><h2 class="section-title">The Journey of Life</h2><p class="sub">Levels unlock one by one. Completed levels remain open for revision and higher scores.</p>
-<div style="margin-top:16px"><div style="display:flex;justify-content:space-between;font-size:.82rem;font-weight:900;margin-bottom:7px"><span>Campaign progress</span><span id="progressText">0/20</span></div><div class="progressline"><span id="campaignBar"></span></div></div>
-<div class="levels" id="levels"><a class="levelcard" data-level="1" href="Adventure/level-01-earth.html" style="--c:#ff7a45">
-<span class="num">Level 1 · Cosmic Forge</span><span class="ico">🌍</span><h3>Birth of Planet Earth</h3><small>Travel 4.6 billion years into the past and build a planet from dust.</small></a><a class="levelcard" data-level="2" href="Adventure/level-02-origin-life.html" style="--c:#00a896">
-<span class="num">Level 2 · Primordial Ocean</span><span class="ico">🧬</span><h3>Arrival of Life</h3><small>Discover how non-living chemistry may have crossed the threshold into life.</small></a><a class="levelcard" data-level="3" href="Adventure/level-03-classification.html" style="--c:#6c63ff">
-<span class="num">Level 3 · Microbe Marsh</span><span class="ico">🦠</span><h3>Classifying Early Life</h3><small>Learn how biologists organise the enormous diversity of living organisms.</small></a><a class="levelcard" data-level="4" href="Adventure/level-04-cell.html" style="--c:#2d9cdb">
-<span class="num">Level 4 · Cell City</span><span class="ico">🔬</span><h3>The Cell: Unit of Life</h3><small>Shrink to microscopic size and enter the fundamental unit of life.</small></a><a class="levelcard" data-level="5" href="Adventure/level-05-organelles.html" style="--c:#ff5d8f">
-<span class="num">Level 5 · Cell City</span><span class="ico">⚙️</span><h3>Organelle Headquarters</h3><small>Meet the specialised structures that keep a eukaryotic cell alive.</small></a><a class="levelcard" data-level="6" href="Adventure/level-06-prok-euk.html" style="--c:#8e44ad">
-<span class="num">Level 6 · Cell City</span><span class="ico">🧫</span><h3>Prokaryotes vs Eukaryotes</h3><small>Compare the two major plans used to organise cellular life.</small></a><a class="levelcard" data-level="7" href="Adventure/level-07-biomolecules.html" style="--c:#f39c12">
-<span class="num">Level 7 · Molecular Market</span><span class="ico">🥑</span><h3>Molecules of Life</h3><small>Collect the four molecular toolkits used to build and power organisms.</small></a><a class="levelcard" data-level="8" href="Adventure/level-08-transport.html" style="--c:#00b4d8">
-<span class="num">Level 8 · Membrane Gate</span><span class="ico">🚪</span><h3>Cell Transport</h3><small>Operate the membrane gates and keep the cell’s internal environment stable.</small></a><a class="levelcard" data-level="9" href="Adventure/level-09-respiration.html" style="--c:#e63946">
-<span class="num">Level 9 · Energy Core</span><span class="ico">⚡</span><h3>Cellular Respiration</h3><small>Follow energy from glucose to ATP inside the cell.</small></a><a class="levelcard" data-level="10" href="Adventure/level-10-photosynthesis.html" style="--c:#43aa8b">
-<span class="num">Level 10 · Sunleaf Garden</span><span class="ico">🌿</span><h3>Photosynthesis</h3><small>Capture sunlight and construct food from carbon dioxide and water.</small></a><a class="levelcard" data-level="11" href="Adventure/level-11-mitosis.html" style="--c:#9b5de5">
-<span class="num">Level 11 · Division Arena</span><span class="ico">➗</span><h3>Mitosis</h3><small>Guide one parent cell through a precise division into two matching cells.</small></a><a class="levelcard" data-level="12" href="Adventure/level-12-meiosis.html" style="--c:#f15bb5">
-<span class="num">Level 12 · Variation Vault</span><span class="ico">🧩</span><h3>Meiosis</h3><small>Create genetically varied reproductive cells and preserve chromosome number across generations.</small></a><a class="levelcard" data-level="13" href="Adventure/level-13-tissues.html" style="--c:#fb8500">
-<span class="num">Level 13 · Tissue Workshop</span><span class="ico">🧵</span><h3>Tissues</h3><small>Combine specialised cells into cooperative working teams.</small></a><a class="levelcard" data-level="14" href="Adventure/level-14-plants.html" style="--c:#2a9d8f">
-<span class="num">Level 14 · Green Kingdom</span><span class="ico">🌳</span><h3>The Plant Kingdom</h3><small>Explore the structures and processes that let plants feed ecosystems.</small></a><a class="levelcard" data-level="15" href="Adventure/level-15-body.html" style="--c:#e76f51">
-<span class="num">Level 15 · Body Metropolis</span><span class="ico">🧍</span><h3>Human Body Organisation</h3><small>Travel from a single specialised cell to the whole human organism.</small></a><a class="levelcard" data-level="16" href="Adventure/level-16-organs-systems.html" style="--c:#d62828">
-<span class="num">Level 16 · Body Metropolis</span><span class="ico">❤️</span><h3>Organs and Organ Systems</h3><small>Coordinate the body’s transport, control, defence, movement and exchange systems.</small></a><a class="levelcard" data-level="17" href="Adventure/level-17-homeostasis.html" style="--c:#457b9d">
-<span class="num">Level 17 · Balance Citadel</span><span class="ico">🛡️</span><h3>Homeostasis and Defence</h3><small>Defend internal balance against temperature shifts, pathogens and changing demands.</small></a><a class="levelcard" data-level="18" href="Adventure/level-18-evolution.html" style="--c:#588157">
-<span class="num">Level 18 · Evolution Peaks</span><span class="ico">🦋</span><h3>Evolution by Natural Selection</h3><small>Watch populations change as inherited variation meets environmental selection.</small></a><a class="levelcard" data-level="19" href="Adventure/level-19-ecology.html" style="--c:#40916c">
-<span class="num">Level 19 · Ecosystem Wilds</span><span class="ico">🌎</span><h3>Ecology and Ecosystems</h3><small>Connect organisms, energy flow and nutrient cycles across living systems.</small></a><a class="levelcard" data-level="20" href="Adventure/level-20-future.html" style="--c:#3a0ca3">
-<span class="num">Level 20 · Tomorrow Horizon</span><span class="ico">🚀</span><h3>Future of Human Evolution</h3><small>Separate scientific evidence, reasonable prediction and imaginative speculation.</small></a></div></section>
-<aside class="sidebarcards">
-<section class="profilecard glass"><div class="bigavatar" data-avatar="">🧑‍🚀</div><h2 style="margin:0"><span data-player="">Explorer</span></h2><p class="sub">Life Explorer</p><div class="statgrid"><div class="mini"><strong data-xp="">0</strong><span>Total XP</span></div><div class="mini"><strong data-coins="">0</strong><span>Knowledge coins</span></div><div class="mini"><strong id="starTotal">0</strong><span>Stars earned</span></div><div class="mini"><strong><span data-streak="">1</span> 🔥</strong><span>Day streak</span></div></div></section>
-<section class="badgecard glass"><h3 style="margin-top:0">🏅 Badge cabinet</h3><div class="badges">
-<div class="badge" data-badge="first-spark" title="First Spark">🌍</div><div class="badge" data-badge="cell-scout" title="Cell Scout">🔬</div><div class="badge" data-badge="division-master" title="Division Master">🧩</div><div class="badge" data-badge="body-architect" title="Body Architect">❤️</div><div class="badge" data-badge="life-voyager" title="Life Voyager">🚀</div><div class="badge" data-badge="perfect-mind" title="Perfect Quiz">💯</div>
-</div></section>
-<section class="tips glass"><h3 style="margin-top:0">🎮 How to play</h3><p class="sub">Read every story scene, complete the mission, then score at least 3/5. A perfect quiz gives three stars.</p></section>
-</aside></div></main><div class="toast" id="toast"></div>
-<script>
-const STORE='lifeQuestPlayerV2';
-const LEVEL_COUNT=20;
-function loadPlayer(){try{return JSON.parse(localStorage.getItem(STORE))||null}catch(e){return null}}
-function savePlayer(p){localStorage.setItem(STORE,JSON.stringify(p))}
-function ensurePlayer(){const p=loadPlayer();if(!p){location.href='../index.html';throw new Error('No player')}return p}
-function todayKey(){return new Date().toISOString().slice(0,10)}
-function updateStreak(p){const t=todayKey();if(p.lastVisit===t)return;const y=new Date();y.setDate(y.getDate()-1);const ys=y.toISOString().slice(0,10);p.streak=p.lastVisit===ys?(p.streak||0)+1:1;p.lastVisit=t;savePlayer(p)}
-function toast(msg){const t=document.querySelector('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.__to);window.__to=setTimeout(()=>t.classList.remove('show'),2100)}
-let soundOn=localStorage.getItem('lifeQuestSound')!=='off';
-function beep(freq=520,d=.08,type='sine'){if(!soundOn)return;try{const A=new (window.AudioContext||window.webkitAudioContext)(),o=A.createOscillator(),g=A.createGain();o.type=type;o.frequency.value=freq;g.gain.setValueAtTime(.08,A.currentTime);g.gain.exponentialRampToValueAtTime(.001,A.currentTime+d);o.connect(g);g.connect(A.destination);o.start();o.stop(A.currentTime+d)}catch(e){}}
-function burst(x=innerWidth/2,y=innerHeight/2,n=22){for(let i=0;i<n;i++){const s=document.createElement('i');s.className='spark';s.style.left=x+'px';s.style.top=y+'px';s.style.background=['#ffd166','#4cc9f0','#55d6a8','#ff5d8f'][i%4];s.style.setProperty('--x',(Math.random()*240-120)+'px');s.style.setProperty('--y',(Math.random()*-190+45)+'px');document.body.appendChild(s);setTimeout(()=>s.remove(),900)}}
-function xpFloat(x,y,amount){const e=document.createElement('div');e.className='xpfloat';e.textContent='+'+amount+' XP';e.style.left=x+'px';e.style.top=y+'px';document.body.appendChild(e);setTimeout(()=>e.remove(),1300)}
-function setupSound(){const b=document.querySelector('#sound');if(!b)return;b.textContent=soundOn?'🔊':'🔇';b.onclick=()=>{soundOn=!soundOn;localStorage.setItem('lifeQuestSound',soundOn?'on':'off');b.textContent=soundOn?'🔊':'🔇';if(soundOn)beep(650)}}
-function enterFullscreen(){const el=document.documentElement;if(document.fullscreenElement)return;const fn=el.requestFullscreen||el.webkitRequestFullscreen||el.msRequestFullscreen;if(fn)try{const r=fn.call(el);if(r&&r.catch)r.catch(()=>{})}catch(e){}}
-function fillStatus(p){document.querySelectorAll('[data-player]').forEach(e=>e.textContent=p.name);document.querySelectorAll('[data-avatar]').forEach(e=>e.textContent=p.avatar||'🧑‍🚀');document.querySelectorAll('[data-xp]').forEach(e=>e.textContent=p.xp||0);document.querySelectorAll('[data-coins]').forEach(e=>e.textContent=p.coins||0);document.querySelectorAll('[data-streak]').forEach(e=>e.textContent=p.streak||1)}
+      .home-visuals {
+        margin-top: 22px;
+        padding: 18px;
+      }
+      .home-visual-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+      }
+      .home-visual-grid img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 15px;
+        border: 1px solid var(--line);
+        background: #08182b;
+      }
+      .home-visual-grid figure {
+        margin: 0;
+      }
+      .home-visual-grid figcaption {
+        font-size: 0.78rem;
+        color: var(--muted);
+        padding: 7px 2px;
+      }
+      @media (max-width: 800px) {
+        .home-visual-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (max-width: 480px) {
+        .home-visual-grid {
+          grid-template-columns: 1fr;
+        }
+        .home-visual-grid img {
+          height: 210px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="onboard" id="onboard">
+      <section class="oncard glass">
+        <div class="planet">🌍</div>
+        <div class="kicker">Interactive biology adventure</div>
+        <h1>Welcome to<br />The Life Quest</h1>
+        <p>
+          Enter your name and choose an explorer. Your personalised journey will
+          begin at the birth of Planet Earth.
+        </p>
+        <input
+          autocomplete="name"
+          class="nameinput"
+          id="nameInput"
+          maxlength="24"
+          placeholder="Type your name"
+        />
+        <div class="avatarpick" id="avatarPick">
+          <button class="on" data-a="🧑‍🚀">🧑‍🚀</button
+          ><button data-a="🧑‍🔬">🧑‍🔬</button><button data-a="🕵️">🕵️</button
+          ><button data-a="🧙">🧙</button>
+        </div>
+        <button class="btn" id="begin">Begin my adventure →</button>
+      </section>
+    </div>
+    <div class="intro" id="intro">
+      <button class="btn alt skipintro" id="skipIntro">Skip intro</button>
+      <div class="introframe on" data-frame="0">
+        <div class="big">🌌</div>
+        <h2>Before there were forests, animals or people…</h2>
+        <p>there was a cloud of gas and dust drifting through space.</p>
+      </div>
+      <div class="introframe" data-frame="1">
+        <div class="big">🌍</div>
+        <h2>Gravity built a planet.</h2>
+        <p>
+          Fire, collisions, cooling oceans and chemistry prepared a home for
+          life.
+        </p>
+      </div>
+      <div class="introframe" data-frame="2">
+        <div class="big">🧬</div>
+        <h2>Then chemistry learned to copy itself.</h2>
+        <p>
+          Cells, tissues, organisms and ecosystems filled Earth with diversity.
+        </p>
+      </div>
+      <div class="introframe" data-frame="3">
+        <div class="big">🚀</div>
+        <h2>Your mission begins now.</h2>
+        <p>
+          Learn the story, win each challenge and unlock the complete Journey of
+          Life.
+        </p>
+      </div>
+    </div>
+    <header class="gamebar">
+      <a class="logo" href="library.html"><i>🧬</i><span>The Life Quest</span></a>
+      <div class="status">
+        <div class="pill namepill">
+          <span class="avatar" data-avatar="">🧑‍🚀</span
+          ><span data-player="">Explorer</span>
+        </div>
+        <div class="pill">⚡ <span data-xp="">0</span> XP</div>
+        <div class="pill">🪙 <span data-coins="">0</span></div>
+        <div class="pill">🔥 <span data-streak="">1</span></div>
+        <button aria-label="Toggle sound" class="sound" id="sound">🔊</button>
+      </div>
+    </header>
+    <main class="shell">
+      <section class="dashhero glass">
+        <div class="kicker">Your biology campaign</div>
+        <h1>Welcome back, <span data-player="">Explorer</span>.</h1>
+        <p>
+          Follow life’s story in order. Every level teaches a new idea, then
+          challenges you with a mini-game and quiz. Earn XP, coins, stars and
+          badges as you progress.
+        </p>
+        <div class="dashactions">
+          <a class="btn" href="Adventure/level-01-earth.html" id="continueBtn"
+            >Continue journey →</a
+          ><a class="btn alt" href="library.html">Open knowledge library</a
+          ><button class="btn alt" id="resetPlayer">Change player</button>
+        </div>
+      </section>
+      <section class="home-visuals glass">
+        <h2 class="section-title">A visual journey through life</h2>
+        <p class="sub">
+          Your original biology diagrams now appear throughout the Adventure
+          levels.
+        </p>
+        <div class="home-visual-grid" style="margin-top: 14px">
+          <figure>
+            <img
+              alt="Origins"
+              loading="lazy"
+              src="Adventure/game-images/origin-ocean.jpg"
+            />
+            <figcaption>Origins</figcaption>
+          </figure>
+          <figure>
+            <img
+              alt="Cells"
+              loading="lazy"
+              src="Adventure/game-images/nucleus.jpg"
+            />
+            <figcaption>Cells</figcaption>
+          </figure>
+          <figure>
+            <img
+              alt="Body systems"
+              loading="lazy"
+              src="Adventure/game-images/body-systems-collage.jpg"
+            />
+            <figcaption>Body systems</figcaption>
+          </figure>
+          <figure>
+            <img
+              alt="Future evolution"
+              loading="lazy"
+              src="Adventure/game-images/future-human.jpg"
+            />
+            <figcaption>Future evolution</figcaption>
+          </figure>
+        </div>
+      </section>
+      <div class="dashboard">
+        <section class="worldmap glass">
+          <div class="kicker">20-level world map</div>
+          <h2 class="section-title">The Journey of Life</h2>
+          <p class="sub">
+            Levels unlock one by one. Completed levels remain open for revision
+            and higher scores.
+          </p>
+          <div style="margin-top: 16px">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                font-size: 0.82rem;
+                font-weight: 900;
+                margin-bottom: 7px;
+              "
+            >
+              <span>Campaign progress</span><span id="progressText">0/20</span>
+            </div>
+            <div class="progressline"><span id="campaignBar"></span></div>
+          </div>
+          <div class="levels" id="levels">
+            <a
+              class="levelcard"
+              data-level="1"
+              href="Adventure/level-01-earth.html"
+              style="--c: #ff7a45"
+            >
+              <span class="num">Level 1 · Cosmic Forge</span
+              ><span class="ico">🌍</span>
+              <h3>Birth of Planet Earth</h3>
+              <small
+                >Travel 4.6 billion years into the past and build a planet from
+                dust.</small
+              ></a
+            ><a
+              class="levelcard"
+              data-level="2"
+              href="Adventure/level-02-origin-life.html"
+              style="--c: #00a896"
+            >
+              <span class="num">Level 2 · Primordial Ocean</span
+              ><span class="ico">🧬</span>
+              <h3>Arrival of Life</h3>
+              <small
+                >Discover how non-living chemistry may have crossed the
+                threshold into life.</small
+              ></a
+            ><a
+              class="levelcard"
+              data-level="3"
+              href="Adventure/level-03-classification.html"
+              style="--c: #6c63ff"
+            >
+              <span class="num">Level 3 · Microbe Marsh</span
+              ><span class="ico">🦠</span>
+              <h3>Classifying Early Life</h3>
+              <small
+                >Learn how biologists organise the enormous diversity of living
+                organisms.</small
+              ></a
+            ><a
+              class="levelcard"
+              data-level="4"
+              href="Adventure/level-04-cell.html"
+              style="--c: #2d9cdb"
+            >
+              <span class="num">Level 4 · Cell City</span
+              ><span class="ico">🔬</span>
+              <h3>The Cell: Unit of Life</h3>
+              <small
+                >Shrink to microscopic size and enter the fundamental unit of
+                life.</small
+              ></a
+            ><a
+              class="levelcard"
+              data-level="5"
+              href="Adventure/level-05-organelles.html"
+              style="--c: #ff5d8f"
+            >
+              <span class="num">Level 5 · Cell City</span
+              ><span class="ico">⚙️</span>
+              <h3>Organelle Headquarters</h3>
+              <small
+                >Meet the specialised structures that keep a eukaryotic cell
+                alive.</small
+              ></a
+            ><a
+              class="levelcard"
+              data-level="6"
+              href="Adventure/level-06-prok-euk.html"
+              style="--c: #8e44ad"
+            >
+              <span class="num">Level 6 · Cell City</span
+              ><span class="ico">🧫</span>
+              <h3>Prokaryotes vs Eukaryotes</h3>
+              <small
+                >Compare the two major plans used to organise cellular
+                life.</small
+              ></a
+            ><a
+              class="levelcard"
+              data-level="7"
+              href="Adventure/level-07-biomolecules.html"
+              style="--c: #f39c12"
+            >
+              <span class="num">Level 7 · Molecular Market</span
+              ><span class="ico">🥑</span>
+              <h3>Molecules of Life</h3>
+              <small
+                >Collect the four molecular toolkits used to build and power
+                organisms.</small
+              ></a
+            ><a
+              class="levelcard"
+              data-level="8"
+              href="Adventure/level-08-transport.html"
+              style="--c: #00b4d8"
+            >
+              <span class="num">Level 8 · Membrane Gate</span
+              ><span class="ico">🚪</span>
+              <h3>Cell Transport</h3>
+              <small
+                >Operate the membrane gates and keep the cell’s internal
+                environment stable.</small
+              ></a
+            ><a
+              class="levelcard"
+              data-level="9"
+              href="Adventure/level-09-respiration.html"
+              style="--c: #e63946"
+            >
+              <span class="num">Level 9 · Energy Core</span
+              ><span class="ico">⚡</span>
+              <h3>Cellular Respiration</h3>
+              <small
+                >Follow energy from glucose to ATP inside the cell.</small
+              ></a
+            ><a
+              class="levelcard"
+              data-level="10"
+              href="Adventure/level-10-photosynthesis.html"
+              style="--c: #43aa8b"
+            >
+              <span class="num">Level 10 · Sunleaf Garden</span
+              ><span class="ico">🌿</span>
+              <h3>Photosynthesis</h3>
+              <small
+                >Capture sunlight and construct food from carbon dioxide and
+                water.</small
+              ></a
+            ><a
+              class="levelcard"
+              data-level="11"
+              href="Adventure/level-11-mitosis.html"
+              style="--c: #9b5de5"
+            >
+              <span class="num">Level 11 · Division Arena</span
+              ><span class="ico">➗</span>
+              <h3>Mitosis</h3>
+              <small
+                >Guide one parent cell through a precise division into two
+                matching cells.</small
+              ></a
+            ><a
+              class="levelcard"
+              data-level="12"
+              href="Adventure/level-12-meiosis.html"
+              style="--c: #f15bb5"
+            >
+              <span class="num">Level 12 · Variation Vault</span
+              ><span class="ico">🧩</span>
+              <h3>Meiosis</h3>
+              <small
+                >Create genetically varied reproductive cells and preserve
+                chromosome number across generations.</small
+              ></a
+            ><a
+              class="levelcard"
+              data-level="13"
+              href="Adventure/level-13-tissues.html"
+              style="--c: #fb8500"
+            >
+              <span class="num">Level 13 · Tissue Workshop</span
+              ><span class="ico">🧵</span>
+              <h3>Tissues</h3>
+              <small
+                >Combine specialised cells into cooperative working
+                teams.</small
+              ></a
+            ><a
+              class="levelcard"
+              data-level="14"
+              href="Adventure/level-14-plants.html"
+              style="--c: #2a9d8f"
+            >
+              <span class="num">Level 14 · Green Kingdom</span
+              ><span class="ico">🌳</span>
+              <h3>The Plant Kingdom</h3>
+              <small
+                >Explore the structures and processes that let plants feed
+                ecosystems.</small
+              ></a
+            ><a
+              class="levelcard"
+              data-level="15"
+              href="Adventure/level-15-body.html"
+              style="--c: #e76f51"
+            >
+              <span class="num">Level 15 · Body Metropolis</span
+              ><span class="ico">🧍</span>
+              <h3>Human Body Organisation</h3>
+              <small
+                >Travel from a single specialised cell to the whole human
+                organism.</small
+              ></a
+            ><a
+              class="levelcard"
+              data-level="16"
+              href="Adventure/level-16-organs-systems.html"
+              style="--c: #d62828"
+            >
+              <span class="num">Level 16 · Body Metropolis</span
+              ><span class="ico">❤️</span>
+              <h3>Organs and Organ Systems</h3>
+              <small
+                >Coordinate the body’s transport, control, defence, movement and
+                exchange systems.</small
+              ></a
+            ><a
+              class="levelcard"
+              data-level="17"
+              href="Adventure/level-17-homeostasis.html"
+              style="--c: #457b9d"
+            >
+              <span class="num">Level 17 · Balance Citadel</span
+              ><span class="ico">🛡️</span>
+              <h3>Homeostasis and Defence</h3>
+              <small
+                >Defend internal balance against temperature shifts, pathogens
+                and changing demands.</small
+              ></a
+            ><a
+              class="levelcard"
+              data-level="18"
+              href="Adventure/level-18-evolution.html"
+              style="--c: #588157"
+            >
+              <span class="num">Level 18 · Evolution Peaks</span
+              ><span class="ico">🦋</span>
+              <h3>Evolution by Natural Selection</h3>
+              <small
+                >Watch populations change as inherited variation meets
+                environmental selection.</small
+              ></a
+            ><a
+              class="levelcard"
+              data-level="19"
+              href="Adventure/level-19-ecology.html"
+              style="--c: #40916c"
+            >
+              <span class="num">Level 19 · Ecosystem Wilds</span
+              ><span class="ico">🌎</span>
+              <h3>Ecology and Ecosystems</h3>
+              <small
+                >Connect organisms, energy flow and nutrient cycles across
+                living systems.</small
+              ></a
+            ><a
+              class="levelcard"
+              data-level="20"
+              href="Adventure/level-20-future.html"
+              style="--c: #3a0ca3"
+            >
+              <span class="num">Level 20 · Tomorrow Horizon</span
+              ><span class="ico">🚀</span>
+              <h3>Future of Human Evolution</h3>
+              <small
+                >Separate scientific evidence, reasonable prediction and
+                imaginative speculation.</small
+              ></a
+            >
+          </div>
+        </section>
+        <aside class="sidebarcards">
+          <section class="profilecard glass">
+            <div class="bigavatar" data-avatar="">🧑‍🚀</div>
+            <h2 style="margin: 0"><span data-player="">Explorer</span></h2>
+            <p class="sub">Life Explorer</p>
+            <div class="statgrid">
+              <div class="mini">
+                <strong data-xp="">0</strong><span>Total XP</span>
+              </div>
+              <div class="mini">
+                <strong data-coins="">0</strong><span>Knowledge coins</span>
+              </div>
+              <div class="mini">
+                <strong id="starTotal">0</strong><span>Stars earned</span>
+              </div>
+              <div class="mini">
+                <strong><span data-streak="">1</span> 🔥</strong
+                ><span>Day streak</span>
+              </div>
+            </div>
+          </section>
+          <section class="badgecard glass">
+            <h3 style="margin-top: 0">🏅 Badge cabinet</h3>
+            <div class="badges">
+              <div class="badge" data-badge="first-spark" title="First Spark">
+                🌍
+              </div>
+              <div class="badge" data-badge="cell-scout" title="Cell Scout">
+                🔬
+              </div>
+              <div
+                class="badge"
+                data-badge="division-master"
+                title="Division Master"
+              >
+                🧩
+              </div>
+              <div
+                class="badge"
+                data-badge="body-architect"
+                title="Body Architect"
+              >
+                ❤️
+              </div>
+              <div class="badge" data-badge="life-voyager" title="Life Voyager">
+                🚀
+              </div>
+              <div class="badge" data-badge="perfect-mind" title="Perfect Quiz">
+                💯
+              </div>
+            </div>
+          </section>
+          <section class="tips glass">
+            <h3 style="margin-top: 0">🎮 How to play</h3>
+            <p class="sub">
+              Read every story scene, complete the mission, then score at least
+              3/5. A perfect quiz gives three stars.
+            </p>
+          </section>
+        </aside>
+      </div>
+    </main>
+    <div class="toast" id="toast"></div>
+    <script>
+      const STORE = "lifeQuestPlayerV2";
+      const LEVEL_COUNT = 20;
+      function loadPlayer() {
+        try {
+          return JSON.parse(localStorage.getItem(STORE)) || null;
+        } catch (e) {
+          return null;
+        }
+      }
+      function savePlayer(p) {
+        localStorage.setItem(STORE, JSON.stringify(p));
+      }
+      function ensurePlayer() {
+        const p = loadPlayer();
+        if (!p) {
+          location.href = "../index.html";
+          throw new Error("No player");
+        }
+        return p;
+      }
+      function todayKey() {
+        return new Date().toISOString().slice(0, 10);
+      }
+      function updateStreak(p) {
+        const t = todayKey();
+        if (p.lastVisit === t) return;
+        const y = new Date();
+        y.setDate(y.getDate() - 1);
+        const ys = y.toISOString().slice(0, 10);
+        p.streak = p.lastVisit === ys ? (p.streak || 0) + 1 : 1;
+        p.lastVisit = t;
+        savePlayer(p);
+      }
+      function toast(msg) {
+        const t = document.querySelector("#toast");
+        t.textContent = msg;
+        t.classList.add("show");
+        clearTimeout(window.__to);
+        window.__to = setTimeout(() => t.classList.remove("show"), 2100);
+      }
+      let soundOn = localStorage.getItem("lifeQuestSound") !== "off";
+      function beep(freq = 520, d = 0.08, type = "sine") {
+        if (!soundOn) return;
+        try {
+          const A = new (window.AudioContext || window.webkitAudioContext)(),
+            o = A.createOscillator(),
+            g = A.createGain();
+          o.type = type;
+          o.frequency.value = freq;
+          g.gain.setValueAtTime(0.08, A.currentTime);
+          g.gain.exponentialRampToValueAtTime(0.001, A.currentTime + d);
+          o.connect(g);
+          g.connect(A.destination);
+          o.start();
+          o.stop(A.currentTime + d);
+        } catch (e) {}
+      }
+      function burst(x = innerWidth / 2, y = innerHeight / 2, n = 22) {
+        for (let i = 0; i < n; i++) {
+          const s = document.createElement("i");
+          s.className = "spark";
+          s.style.left = x + "px";
+          s.style.top = y + "px";
+          s.style.background = ["#ffd166", "#4cc9f0", "#55d6a8", "#ff5d8f"][
+            i % 4
+          ];
+          s.style.setProperty("--x", Math.random() * 240 - 120 + "px");
+          s.style.setProperty("--y", Math.random() * -190 + 45 + "px");
+          document.body.appendChild(s);
+          setTimeout(() => s.remove(), 900);
+        }
+      }
+      function xpFloat(x, y, amount) {
+        const e = document.createElement("div");
+        e.className = "xpfloat";
+        e.textContent = "+" + amount + " XP";
+        e.style.left = x + "px";
+        e.style.top = y + "px";
+        document.body.appendChild(e);
+        setTimeout(() => e.remove(), 1300);
+      }
+      function setupSound() {
+        const b = document.querySelector("#sound");
+        if (!b) return;
+        b.textContent = soundOn ? "🔊" : "🔇";
+        b.onclick = () => {
+          soundOn = !soundOn;
+          localStorage.setItem("lifeQuestSound", soundOn ? "on" : "off");
+          b.textContent = soundOn ? "🔊" : "🔇";
+          if (soundOn) beep(650);
+        };
+      }
+      function enterFullscreen() {
+        const el = document.documentElement;
+        if (document.fullscreenElement) return;
+        const fn =
+          el.requestFullscreen ||
+          el.webkitRequestFullscreen ||
+          el.msRequestFullscreen;
+        if (fn)
+          try {
+            const r = fn.call(el);
+            if (r && r.catch) r.catch(() => {});
+          } catch (e) {}
+      }
+      function fillStatus(p) {
+        document
+          .querySelectorAll("[data-player]")
+          .forEach((e) => (e.textContent = p.name));
+        document
+          .querySelectorAll("[data-avatar]")
+          .forEach((e) => (e.textContent = p.avatar || "🧑‍🚀"));
+        document
+          .querySelectorAll("[data-xp]")
+          .forEach((e) => (e.textContent = p.xp || 0));
+        document
+          .querySelectorAll("[data-coins]")
+          .forEach((e) => (e.textContent = p.coins || 0));
+        document
+          .querySelectorAll("[data-streak]")
+          .forEach((e) => (e.textContent = p.streak || 1));
+      }
 
-let selectedAvatar='🧑‍🚀',frame=0,introTimer;
-document.querySelectorAll('#avatarPick button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#avatarPick button').forEach(x=>x.classList.remove('on'));b.classList.add('on');selectedAvatar=b.dataset.a;beep(520)});
-function freshPlayer(name){return{name:name.trim(),avatar:selectedAvatar,xp:0,coins:0,streak:1,lastVisit:todayKey(),completed:[],missions:[],scores:{},stars:{},badges:[]}}
-function showIntro(){document.querySelector('#onboard').classList.add('hidden');document.querySelector('#intro').classList.add('show');frame=0;showFrame();introTimer=setInterval(()=>{frame++;if(frame>=4)finishIntro();else showFrame()},2600)}
-function showFrame(){document.querySelectorAll('.introframe').forEach((x,i)=>x.classList.toggle('on',i===frame));beep(280+frame*120,.14)}
-function finishIntro(){clearInterval(introTimer);document.querySelector('#intro').classList.remove('show');refreshHome();burst(innerWidth/2,innerHeight/2,35);toast('Your first level is ready!')}
-document.querySelector('#begin').onclick=()=>{const n=document.querySelector('#nameInput').value.trim();if(n.length<2)return toast('Please enter your name');enterFullscreen();savePlayer(freshPlayer(n));showIntro()};
-document.querySelector('#nameInput').addEventListener('keydown',e=>{if(e.key==='Enter')document.querySelector('#begin').click()});
-document.querySelector('#skipIntro').onclick=finishIntro;
-document.querySelector('#resetPlayer').onclick=()=>{if(confirm('Start again with a new player? Your current game progress will be removed.')){localStorage.removeItem(STORE);location.reload()}};
-function refreshHome(){
- const p=loadPlayer();if(!p)return;document.querySelector('.gamebar').style.display='flex';updateStreak(p);fillStatus(p);setupSound();document.querySelector('#onboard').classList.add('hidden');
- const done=p.completed||[],next=Math.min(20,done.length+1);document.querySelector('#continueBtn').href=`Adventure/level-${String(next).padStart(2,'0')}-${{"1": "earth", "2": "origin-life", "3": "classification", "4": "cell", "5": "organelles", "6": "prok-euk", "7": "biomolecules", "8": "transport", "9": "respiration", "10": "photosynthesis", "11": "mitosis", "12": "meiosis", "13": "tissues", "14": "plants", "15": "body", "16": "organs-systems", "17": "homeostasis", "18": "evolution", "19": "ecology", "20": "future"}[next]}.html`;document.querySelector('#continueBtn').textContent=done.length===20?'Replay final level →':`Continue Level ${next} →`;
- document.querySelectorAll('[data-level]').forEach(a=>{const n=+a.dataset.level;a.classList.toggle('done',done.includes(n));a.classList.toggle('current',n===next);a.classList.toggle('locked',n>1&&!done.includes(n-1))});
- document.querySelector('#progressText').textContent=`${done.length}/20`;document.querySelector('#campaignBar').style.width=(done.length/20*100)+'%';
- document.querySelector('#starTotal').textContent=Object.values(p.stars||{}).reduce((a,b)=>a+b,0);document.querySelectorAll('[data-badge]').forEach(b=>b.classList.toggle('earned',(p.badges||[]).includes(b.dataset.badge)));
-}
-document.addEventListener('click',()=>{if(!window.lifeQuestFullscreenTried){window.lifeQuestFullscreenTried=true;enterFullscreen()}},{once:true});
-if(loadPlayer())refreshHome();else document.querySelector('.gamebar').style.display='none';
-</script></body></html>
+      let selectedAvatar = "🧑‍🚀",
+        frame = 0,
+        introTimer;
+      document.querySelectorAll("#avatarPick button").forEach(
+        (b) =>
+          (b.onclick = () => {
+            document
+              .querySelectorAll("#avatarPick button")
+              .forEach((x) => x.classList.remove("on"));
+            b.classList.add("on");
+            selectedAvatar = b.dataset.a;
+            beep(520);
+          }),
+      );
+      function freshPlayer(name) {
+        return {
+          name: name.trim(),
+          avatar: selectedAvatar,
+          xp: 0,
+          coins: 0,
+          streak: 1,
+          lastVisit: todayKey(),
+          completed: [],
+          missions: [],
+          scores: {},
+          stars: {},
+          badges: [],
+        };
+      }
+      function showIntro() {
+        document.querySelector("#onboard").classList.add("hidden");
+        document.querySelector("#intro").classList.add("show");
+        frame = 0;
+        showFrame();
+        introTimer = setInterval(() => {
+          frame++;
+          if (frame >= 4) finishIntro();
+          else showFrame();
+        }, 2600);
+      }
+      function showFrame() {
+        document
+          .querySelectorAll(".introframe")
+          .forEach((x, i) => x.classList.toggle("on", i === frame));
+        beep(280 + frame * 120, 0.14);
+      }
+      function finishIntro() {
+        clearInterval(introTimer);
+        document.querySelector("#intro").classList.remove("show");
+        refreshHome();
+        burst(innerWidth / 2, innerHeight / 2, 35);
+        toast("Your first level is ready!");
+      }
+      document.querySelector("#begin").onclick = () => {
+        const n = document.querySelector("#nameInput").value.trim();
+        if (n.length < 2) return toast("Please enter your name");
+        enterFullscreen();
+        savePlayer(freshPlayer(n));
+        showIntro();
+      };
+      document.querySelector("#nameInput").addEventListener("keydown", (e) => {
+        if (e.key === "Enter") document.querySelector("#begin").click();
+      });
+      document.querySelector("#skipIntro").onclick = finishIntro;
+      document.querySelector("#resetPlayer").onclick = () => {
+        if (
+          confirm(
+            "Start again with a new player? Your current game progress will be removed.",
+          )
+        ) {
+          localStorage.removeItem(STORE);
+          location.reload();
+        }
+      };
+      function refreshHome() {
+        const p = loadPlayer();
+        if (!p) return;
+        document.querySelector(".gamebar").style.display = "flex";
+        updateStreak(p);
+        fillStatus(p);
+        setupSound();
+        document.querySelector("#onboard").classList.add("hidden");
+        const done = p.completed || [],
+          next = Math.min(20, done.length + 1);
+        document.querySelector("#continueBtn").href =
+          `Adventure/level-${String(next).padStart(2, "0")}-${{ 1: "earth", 2: "origin-life", 3: "classification", 4: "cell", 5: "organelles", 6: "prok-euk", 7: "biomolecules", 8: "transport", 9: "respiration", 10: "photosynthesis", 11: "mitosis", 12: "meiosis", 13: "tissues", 14: "plants", 15: "body", 16: "organs-systems", 17: "homeostasis", 18: "evolution", 19: "ecology", 20: "future" }[next]}.html`;
+        document.querySelector("#continueBtn").textContent =
+          done.length === 20
+            ? "Replay final level →"
+            : `Continue Level ${next} →`;
+        document.querySelectorAll("[data-level]").forEach((a) => {
+          const n = +a.dataset.level;
+          a.classList.toggle("done", done.includes(n));
+          a.classList.toggle("current", n === next);
+          a.classList.toggle("locked", n > 1 && !done.includes(n - 1));
+        });
+        document.querySelector("#progressText").textContent =
+          `${done.length}/20`;
+        document.querySelector("#campaignBar").style.width =
+          (done.length / 20) * 100 + "%";
+        document.querySelector("#starTotal").textContent = Object.values(
+          p.stars || {},
+        ).reduce((a, b) => a + b, 0);
+        document
+          .querySelectorAll("[data-badge]")
+          .forEach((b) =>
+            b.classList.toggle(
+              "earned",
+              (p.badges || []).includes(b.dataset.badge),
+            ),
+          );
+      }
+      document.addEventListener(
+        "click",
+        () => {
+          if (!window.lifeQuestFullscreenTried) {
+            window.lifeQuestFullscreenTried = true;
+            enterFullscreen();
+          }
+        },
+        { once: true },
+      );
+      if (loadPlayer()) refreshHome();
+      else document.querySelector(".gamebar").style.display = "none";
+    </script>
+  </body>
+</html>
