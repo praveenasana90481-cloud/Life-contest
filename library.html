@@ -1452,103 +1452,160 @@
             }
         }
 
+
     
-        /* BEGINNER POP-UP GUIDE */
-        .beginner-popup-overlay {
+        /* FLOATING BEGINNER GUIDE
+           These tips float above the page and do not affect the layout. */
+        .floating-guide-layer {
             position: fixed;
             inset: 0;
-            z-index: 12000;
-            display: none;
-            place-items: center;
-            padding: 20px;
-            background: rgba(10, 16, 28, .62);
-            backdrop-filter: blur(8px);
+            z-index: 9000;
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity .45s ease, visibility .45s ease;
         }
 
-        .beginner-popup-overlay.open {
-            display: grid;
+        .floating-guide-layer.show {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .beginner-popup {
-            position: relative;
-            width: min(520px, 94vw);
-            padding: 26px 24px 22px;
-            border: 1px solid var(--line);
-            border-radius: 22px;
-            background: var(--surface);
+        .floating-tip {
+            position: fixed;
+            width: min(245px, calc(100vw - 24px));
+            padding: 12px 38px 12px 13px;
+            border: 1px solid color-mix(in srgb, var(--accent) 34%, var(--line));
+            border-radius: 13px;
+            background: color-mix(in srgb, var(--surface) 94%, transparent);
             color: var(--text);
-            box-shadow: 0 30px 90px rgba(0, 0, 0, .30);
-            animation: popupIn .28s ease both;
+            box-shadow: 0 14px 34px rgba(20, 30, 50, .18);
+            backdrop-filter: blur(12px);
+            pointer-events: auto;
+            transform: translateY(8px) scale(.98);
+            opacity: 0;
+            transition:
+                opacity .35s ease,
+                transform .35s ease,
+                border-color .2s ease,
+                box-shadow .2s ease;
         }
 
-        .beginner-popup h2 {
-            margin: 0 42px 8px 0;
+        .floating-guide-layer.show .floating-tip {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .floating-tip:hover {
+            transform: translateY(-5px) scale(1.025);
+            border-color: var(--accent);
+            box-shadow: 0 20px 42px rgba(20, 30, 50, .24);
+        }
+
+        .floating-tip strong {
+            display: block;
+            margin-bottom: 3px;
             color: var(--accent);
-            font-size: 1.35rem;
-            line-height: 1.2;
+            font-size: .82rem;
+            line-height: 1.25;
         }
 
-        .beginner-popup p {
+        .floating-tip p {
             margin: 0;
             color: var(--muted);
-            font-size: .95rem;
-            line-height: 1.6;
+            font-size: .74rem;
+            line-height: 1.42;
         }
 
-        .beginner-popup-close {
+        .floating-tip-close {
             position: absolute;
-            top: 14px;
-            right: 14px;
-            width: 34px;
-            height: 34px;
+            top: 7px;
+            right: 7px;
+            width: 25px;
+            height: 25px;
+            display: grid;
+            place-items: center;
             border: 1px solid var(--line);
-            border-radius: 10px;
+            border-radius: 8px;
             background: var(--surface2);
             color: var(--text);
-            font-size: 20px;
+            font-size: 15px;
             font-weight: 900;
+            line-height: 1;
             cursor: pointer;
         }
 
-        .beginner-popup-actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-top: 20px;
+        .floating-tip-close:hover,
+        .floating-tip-close:focus-visible {
+            color: var(--accent);
+            border-color: var(--accent);
+            outline: none;
         }
 
-        .beginner-popup-actions button {
-            border-radius: 11px;
-            padding: 9px 14px;
-            font-weight: 850;
-            cursor: pointer;
+        .floating-tip::before {
+            content: "";
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: inherit;
+            border-left: 1px solid color-mix(in srgb, var(--accent) 34%, var(--line));
+            border-bottom: 1px solid color-mix(in srgb, var(--accent) 34%, var(--line));
+            transform: rotate(45deg);
         }
 
-        .popup-next {
-            border: 0;
-            background: var(--accent);
-            color: #fff;
+        .floating-tip[data-side="right"]::before {
+            left: -7px;
+            top: 22px;
         }
 
-        .popup-skip {
+        .floating-tip[data-side="left"]::before {
+            right: -7px;
+            top: 22px;
+            transform: rotate(225deg);
+        }
+
+        .floating-tip[data-side="bottom"]::before {
+            left: 28px;
+            top: -7px;
+            transform: rotate(135deg);
+        }
+
+        .floating-tip[data-side="top"]::before {
+            left: 28px;
+            bottom: -7px;
+            transform: rotate(-45deg);
+        }
+
+        .floating-guide-dismiss-all {
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            pointer-events: auto;
             border: 1px solid var(--line);
-            background: var(--surface2);
+            border-radius: 11px;
+            padding: 8px 12px;
+            background: var(--surface);
             color: var(--text);
+            box-shadow: 0 10px 28px rgba(20, 30, 50, .14);
+            font-size: .75rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform .2s ease, border-color .2s ease;
         }
 
-        @keyframes popupIn {
-            from {
-                opacity: 0;
-                transform: translateY(12px) scale(.97);
-            }
-            to {
-                opacity: 1;
-                transform: none;
+        .floating-guide-dismiss-all:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent);
+        }
+
+        @media (max-width: 760px) {
+            .floating-tip {
+                width: min(220px, calc(100vw - 20px));
             }
         }
 
         @media print {
-            .beginner-popup-overlay {
+            .floating-guide-layer {
                 display: none !important;
             }
         }
@@ -1557,24 +1614,7 @@
 </head>
 
 <body data-page="index.html" style="--accent:#b42318;--soft:color-mix(in srgb,#b42318 10%,var(--surface))">
-    <!-- BEGINNER POP-UP GUIDE: shown only on library.html -->
-    <div class="beginner-popup-overlay" id="beginnerPopupOverlay" aria-hidden="true">
-        <div class="beginner-popup" role="dialog" aria-modal="true"
-            aria-labelledby="beginnerPopupTitle" aria-describedby="beginnerPopupText">
-            <button class="beginner-popup-close" id="beginnerPopupClose"
-                aria-label="Close beginner guide">×</button>
-
-            <h2 id="beginnerPopupTitle">Welcome to The Life</h2>
-            <p id="beginnerPopupText"></p>
-
-            <div class="beginner-popup-actions">
-                <button class="popup-skip" id="beginnerPopupSkip">Skip guide</button>
-                <button class="popup-next" id="beginnerPopupNext">Next</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- INTRO SPLASH: displays the large logo for five seconds when the page opens -->
+<!-- INTRO SPLASH: displays the large logo for five seconds when the page opens -->
     <div class="intro-splash" id="introSplash" aria-hidden="true">
         <img src="assets/logo.png" alt="">
     </div>
@@ -1829,88 +1869,174 @@
         })();
     </script>
 
+    <!-- FLOATING BEGINNER GUIDE -->
+    <div class="floating-guide-layer" id="floatingGuideLayer" aria-label="Beginner guide">
+        <div class="floating-tip" data-target=".brand" data-side="right">
+            <button class="floating-tip-close" type="button" aria-label="Close this tip">×</button>
+            <strong>The Life game</strong>
+            <p>Click this title to open the interactive biology game in index.html.</p>
+        </div>
+
+        <div class="floating-tip" data-target=".navgroup a[href='library.html']" data-side="right">
+            <button class="floating-tip-close" type="button" aria-label="Close this tip">×</button>
+            <strong>Library home</strong>
+            <p>This sidebar link returns to library.html, the main lesson library.</p>
+        </div>
+
+        <div class="floating-tip" data-target=".homeactions .primary" data-side="bottom">
+            <button class="floating-tip-close" type="button" aria-label="Close this tip">×</button>
+            <strong>Start learning</strong>
+            <p>Open the guided learning path and follow the biology topics in order.</p>
+        </div>
+
+        <div class="floating-tip" data-target=".homeactions .secondary" data-side="bottom">
+            <button class="floating-tip-close" type="button" aria-label="Close this tip">×</button>
+            <strong>Search chapters</strong>
+            <p>Use this button to quickly find a lesson, organelle, or body topic.</p>
+        </div>
+
+        <div class="floating-tip" data-target=".modulegrid" data-side="top">
+            <button class="floating-tip-close" type="button" aria-label="Close this tip">×</button>
+            <strong>Subject cards</strong>
+            <p>Each card opens a major biology section and its connected lessons.</p>
+        </div>
+
+        <button class="floating-guide-dismiss-all" id="dismissFloatingGuide" type="button">
+            Close all tips
+        </button>
+    </div>
+
+
     <script>
-        // Beginner pop-up tour shown only on library.html.
+        // Floating beginner guide:
+        // waits until the opening logo animation finishes, then places tips
+        // beside their related controls without changing the page layout.
         (() => {
-            const overlay = document.getElementById('beginnerPopupOverlay');
-            const title = document.getElementById('beginnerPopupTitle');
-            const text = document.getElementById('beginnerPopupText');
-            const next = document.getElementById('beginnerPopupNext');
-            const skip = document.getElementById('beginnerPopupSkip');
-            const close = document.getElementById('beginnerPopupClose');
+            const layer = document.getElementById('floatingGuideLayer');
+            const splash = document.getElementById('introSplash');
+            const tips = [...document.querySelectorAll('.floating-tip')];
+            const dismissAll = document.getElementById('dismissFloatingGuide');
 
-            if (!overlay || !title || !text || !next || !skip || !close) return;
+            if (!layer || !tips.length) return;
 
-            const steps = [
-                {
-                    title: 'The Life title',
-                    text: 'Click “The Life” at the top-left to open index.html, the interactive biology game.'
-                },
-                {
-                    title: 'Lesson library',
-                    text: 'Use the left sidebar to open biology lessons. The first “The Life” link opens library.html.'
-                },
-                {
-                    title: 'Start learning',
-                    text: 'Choose “Start learning” for a guided route through the complete biology series.'
-                },
-                {
-                    title: 'Search chapters',
-                    text: 'Use “Search chapters” or the Search button at the top to quickly find any topic.'
-                },
-                {
-                    title: 'Subject cards',
-                    text: 'Click any subject card such as Cells, Human Biology, or Future Evolution to open that section.'
-                },
-                {
-                    title: 'Introduction video',
-                    text: 'Press Play to watch the introduction. Use the video controls for pause, volume, and fullscreen.'
-                }
-            ];
+            const gap = 12;
+            const viewportPadding = 10;
 
-            let step = 0;
-
-            const showStep = () => {
-                const item = steps[step];
-                title.textContent = item.title;
-                text.textContent = item.text;
-                next.textContent = step === steps.length - 1 ? 'Finish' : 'Next';
-                overlay.classList.add('open');
-                overlay.setAttribute('aria-hidden', 'false');
-                next.focus();
-            };
-
-            const finish = () => {
-                overlay.classList.remove('open');
-                overlay.setAttribute('aria-hidden', 'true');
-                localStorage.setItem('life-library-guide-seen', 'yes');
-            };
-
-            next.addEventListener('click', () => {
-                if (step < steps.length - 1) {
-                    step += 1;
-                    showStep();
-                } else {
-                    finish();
-                }
-            });
-
-            skip.addEventListener('click', finish);
-            close.addEventListener('click', finish);
-
-            overlay.addEventListener('click', (event) => {
-                if (event.target === overlay) finish();
-            });
-
-            document.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape' && overlay.classList.contains('open')) {
-                    finish();
-                }
-            });
-
-            if (localStorage.getItem('life-library-guide-seen') !== 'yes') {
-                setTimeout(showStep, 700);
+            function clamp(value, minimum, maximum) {
+                return Math.min(Math.max(value, minimum), maximum);
             }
+
+            function placeTip(tip) {
+                const selector = tip.dataset.target;
+                const target = selector ? document.querySelector(selector) : null;
+
+                if (!target || !target.getClientRects().length) {
+                    tip.style.display = 'none';
+                    return;
+                }
+
+                tip.style.display = '';
+                const targetRect = target.getBoundingClientRect();
+                const tipRect = tip.getBoundingClientRect();
+                let side = tip.dataset.side || 'right';
+                let left = 0;
+                let top = 0;
+
+                if (side === 'right') {
+                    left = targetRect.right + gap;
+                    top = targetRect.top + targetRect.height / 2 - tipRect.height / 2;
+
+                    if (left + tipRect.width > innerWidth - viewportPadding) {
+                        side = 'bottom';
+                    }
+                }
+
+                if (side === 'left') {
+                    left = targetRect.left - tipRect.width - gap;
+                    top = targetRect.top + targetRect.height / 2 - tipRect.height / 2;
+
+                    if (left < viewportPadding) {
+                        side = 'bottom';
+                    }
+                }
+
+                if (side === 'bottom') {
+                    left = targetRect.left;
+                    top = targetRect.bottom + gap;
+
+                    if (top + tipRect.height > innerHeight - viewportPadding) {
+                        side = 'top';
+                    }
+                }
+
+                if (side === 'top') {
+                    left = targetRect.left;
+                    top = targetRect.top - tipRect.height - gap;
+
+                    if (top < viewportPadding) {
+                        side = 'bottom';
+                        top = targetRect.bottom + gap;
+                    }
+                }
+
+                left = clamp(left, viewportPadding, innerWidth - tipRect.width - viewportPadding);
+                top = clamp(top, viewportPadding, innerHeight - tipRect.height - viewportPadding);
+
+                tip.dataset.side = side;
+                tip.style.left = left + 'px';
+                tip.style.top = top + 'px';
+            }
+
+            function placeAllTips() {
+                tips.forEach(placeTip);
+            }
+
+            function showGuide() {
+                placeAllTips();
+                requestAnimationFrame(() => layer.classList.add('show'));
+            }
+
+            function waitForSplash() {
+                if (!splash || splash.classList.contains('done') || !document.body.contains(splash)) {
+                    showGuide();
+                    return;
+                }
+
+                const observer = new MutationObserver(() => {
+                    if (splash.classList.contains('done') || !document.body.contains(splash)) {
+                        observer.disconnect();
+                        setTimeout(showGuide, 250);
+                    }
+                });
+
+                observer.observe(splash, {
+                    attributes: true,
+                    attributeFilter: ['class'],
+                    childList: false
+                });
+
+                // Fallback matching the 5-second hold plus 1.8-second shrink animation.
+                setTimeout(() => {
+                    observer.disconnect();
+                    if (!layer.classList.contains('show')) showGuide();
+                }, 7200);
+            }
+
+            tips.forEach((tip) => {
+                tip.querySelector('.floating-tip-close')?.addEventListener('click', () => {
+                    tip.remove();
+                });
+            });
+
+            dismissAll?.addEventListener('click', () => {
+                layer.classList.remove('show');
+                setTimeout(() => layer.remove(), 450);
+            });
+
+            addEventListener('resize', placeAllTips);
+            addEventListener('scroll', placeAllTips, { passive: true });
+
+            waitForSplash();
         })();
     </script>
 
