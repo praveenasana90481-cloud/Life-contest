@@ -1446,88 +1446,109 @@
         .topbar .brand{min-width:0}.topbar .brand img{display:none}.topbar .brandtext strong{font-size:1rem;line-height:1.05}.topbar .brandtext span{white-space:nowrap}
         @media(max-width:650px){.brandtext span{display:block;font-size:.62rem}.topbar .brandtext strong{font-size:.9rem}.intro-splash img{width:min(520px,90vw)}}
         @media(prefers-reduced-motion:reduce){.intro-splash img{animation:none!important}.intro-splash{transition:opacity .3s ease,visibility .3s ease}}
-
-        /* BEGINNER HELP BOXES
-           These boxes are visible only on library.html.
-           Each box has an × button so the learner can close it. */
-        .beginner-help {
-            position: relative;
-            margin: 10px 0 14px;
-            padding: 13px 42px 13px 14px;
-            border: 1px solid color-mix(in srgb, var(--accent) 32%, var(--line));
-            border-left: 5px solid var(--accent);
-            border-radius: 14px;
-            background: color-mix(in srgb, var(--soft) 72%, var(--surface));
-            color: var(--text);
-            box-shadow: 0 8px 24px rgba(20, 30, 50, .07);
-            font-size: .82rem;
-            line-height: 1.5;
+@media print {
+            .beginner-help {
+                display: none !important;
+            }
         }
 
-        .beginner-help strong {
-            display: block;
-            margin-bottom: 3px;
-            color: var(--accent);
-            font-size: .86rem;
-        }
-
-        .beginner-help p {
-            margin: 0;
-            color: var(--muted);
-        }
-
-        .beginner-help-close {
-            position: absolute;
-            top: 8px;
-            right: 9px;
-            width: 28px;
-            height: 28px;
-            display: grid;
+    
+        /* BEGINNER POP-UP GUIDE */
+        .beginner-popup-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 12000;
+            display: none;
             place-items: center;
+            padding: 20px;
+            background: rgba(10, 16, 28, .62);
+            backdrop-filter: blur(8px);
+        }
+
+        .beginner-popup-overlay.open {
+            display: grid;
+        }
+
+        .beginner-popup {
+            position: relative;
+            width: min(520px, 94vw);
+            padding: 26px 24px 22px;
             border: 1px solid var(--line);
-            border-radius: 9px;
+            border-radius: 22px;
             background: var(--surface);
             color: var(--text);
-            font-size: 17px;
+            box-shadow: 0 30px 90px rgba(0, 0, 0, .30);
+            animation: popupIn .28s ease both;
+        }
+
+        .beginner-popup h2 {
+            margin: 0 42px 8px 0;
+            color: var(--accent);
+            font-size: 1.35rem;
+            line-height: 1.2;
+        }
+
+        .beginner-popup p {
+            margin: 0;
+            color: var(--muted);
+            font-size: .95rem;
+            line-height: 1.6;
+        }
+
+        .beginner-popup-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 34px;
+            height: 34px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--surface2);
+            color: var(--text);
+            font-size: 20px;
             font-weight: 900;
-            line-height: 1;
             cursor: pointer;
         }
 
-        .beginner-help-close:hover,
-        .beginner-help-close:focus-visible {
-            border-color: var(--accent);
-            color: var(--accent);
-            outline: none;
+        .beginner-popup-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
         }
 
-        .topbar-help {
-            position: fixed;
-            z-index: 1700;
-            top: 82px;
-            left: 18px;
-            width: min(360px, calc(100vw - 36px));
-            margin: 0;
+        .beginner-popup-actions button {
+            border-radius: 11px;
+            padding: 9px 14px;
+            font-weight: 850;
+            cursor: pointer;
         }
 
-        .sidebar-help {
-            margin: 0 0 16px;
+        .popup-next {
+            border: 0;
+            background: var(--accent);
+            color: #fff;
         }
 
-        .content-help {
-            margin-bottom: 18px;
+        .popup-skip {
+            border: 1px solid var(--line);
+            background: var(--surface2);
+            color: var(--text);
         }
 
-        @media (max-width: 900px) {
-            .topbar-help {
-                top: 80px;
-                left: 12px;
-                width: calc(100vw - 24px);
+        @keyframes popupIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px) scale(.97);
+            }
+            to {
+                opacity: 1;
+                transform: none;
             }
         }
 
         @media print {
-            .beginner-help {
+            .beginner-popup-overlay {
                 display: none !important;
             }
         }
@@ -1536,6 +1557,23 @@
 </head>
 
 <body data-page="index.html" style="--accent:#b42318;--soft:color-mix(in srgb,#b42318 10%,var(--surface))">
+    <!-- BEGINNER POP-UP GUIDE: shown only on library.html -->
+    <div class="beginner-popup-overlay" id="beginnerPopupOverlay" aria-hidden="true">
+        <div class="beginner-popup" role="dialog" aria-modal="true"
+            aria-labelledby="beginnerPopupTitle" aria-describedby="beginnerPopupText">
+            <button class="beginner-popup-close" id="beginnerPopupClose"
+                aria-label="Close beginner guide">×</button>
+
+            <h2 id="beginnerPopupTitle">Welcome to The Life</h2>
+            <p id="beginnerPopupText"></p>
+
+            <div class="beginner-popup-actions">
+                <button class="popup-skip" id="beginnerPopupSkip">Skip guide</button>
+                <button class="popup-next" id="beginnerPopupNext">Next</button>
+            </div>
+        </div>
+    </div>
+
     <!-- INTRO SPLASH: displays the large logo for five seconds when the page opens -->
     <div class="intro-splash" id="introSplash" aria-hidden="true">
         <img src="assets/logo.png" alt="">
@@ -1578,25 +1616,11 @@
             </div>
         </div>
     </header>
-    <div class="beginner-help topbar-help" id="helpBrand" role="note">
-        <button class="beginner-help-close" type="button"
-            aria-label="Close this beginner tip" data-close-help="helpBrand">×</button>
-        <strong>The Life title</strong>
-        <p>Click “The Life” at the top-left to open index.html, the interactive biology game.</p>
-    </div>
-
-    <!-- PAGE SHELL: holds the sidebar and main content next to each other -->
+<!-- PAGE SHELL: holds the sidebar and main content next to each other -->
     <div class="shell">
         <!-- SIDEBAR: contains course progress and links to every biology lesson -->
         <aside class="sidebar" id="sidebar">
-    <div class="beginner-help sidebar-help" id="helpSidebar" role="note">
-        <button class="beginner-help-close" type="button"
-            aria-label="Close this beginner tip" data-close-help="helpSidebar">×</button>
-        <strong>Lesson library</strong>
-        <p>Use these links to open lessons. The first “The Life” link opens library.html, the learning-library home page.</p>
-    </div>
-
-            <!-- COURSE PROGRESS: shows completed lessons out of the total lessons -->
+<!-- COURSE PROGRESS: shows completed lessons out of the total lessons -->
             <div class="course-card">
                 <div class="course-top"><span>Course progress</span><span data-count>0/59</span></div>
                 <div class="track"><span data-bar></span></div>
@@ -1703,14 +1727,7 @@
         <!-- MAIN CONTENT: contains the introduction, modules, video and footer -->
         <main class="main" id="content">
             <div class="wrap">
-    <div class="beginner-help content-help" id="helpContent" role="note">
-        <button class="beginner-help-close" type="button"
-            aria-label="Close this beginner tip" data-close-help="helpContent">×</button>
-        <strong>How to use this page</strong>
-        <p>Choose Start learning for the guided path, Search chapters to find a topic, or select a subject card below.</p>
-    </div>
-
-                <!-- HERO SECTION: introduces the website and gives learning/search actions -->
+<!-- HERO SECTION: introduces the website and gives learning/search actions -->
                 <section class="homehero">
                     <div class="homecopy"><span class="eyebrow"
                             style="background:var(--soft);color:var(--accent);border-color:var(--line)">Interactive
@@ -1730,15 +1747,7 @@
                     </div>
                 </section>
                 <!-- INTRODUCTION VIDEO: plays the biology-series introduction -->
-                
-    <div class="beginner-help content-help" id="helpVideo" role="note">
-        <button class="beginner-help-close" type="button"
-            aria-label="Close this beginner tip" data-close-help="helpVideo">×</button>
-        <strong>Introduction video</strong>
-        <p>Press the play button to watch the introduction. Use the video controls to pause, change volume, or view fullscreen.</p>
-    </div>
-
-                <div class="videoshell"><video controls playsinline preload="metadata">
+<div class="videoshell"><video controls playsinline preload="metadata">
                         <source src="INTRO.mp4" type="video/mp4">Your browser cannot play this video.
                     </video></div>
                 <div class="sectionhead">
@@ -1749,15 +1758,7 @@
                         possibilities.</p>
                 </div>
                 <!-- LEARNING MODULES: each card links to a major biology topic -->
-                
-    <div class="beginner-help content-help" id="helpModules" role="note">
-        <button class="beginner-help-close" type="button"
-            aria-label="Close this beginner tip" data-close-help="helpModules">×</button>
-        <strong>Subject cards</strong>
-        <p>Each box below is a clickable subject. Select one to open its biology lessons.</p>
-    </div>
-
-                <div class="modulegrid"><a class="module"
+<div class="modulegrid"><a class="module"
                         href="The Begining &amp; Classification of Life on Earth/The Begining of Planet Earth.html">
                         <div class="cardicon">🌍</div>
                         <h3>Foundations</h3>
@@ -1828,28 +1829,88 @@
         })();
     </script>
 
-
     <script>
-        // BEGINNER HELP BOXES:
-        // Close a box when its × button is clicked.
-        // The closed state is remembered in this browser using localStorage.
+        // Beginner pop-up tour shown only on library.html.
         (() => {
-            const helpBoxes = document.querySelectorAll('.beginner-help');
+            const overlay = document.getElementById('beginnerPopupOverlay');
+            const title = document.getElementById('beginnerPopupTitle');
+            const text = document.getElementById('beginnerPopupText');
+            const next = document.getElementById('beginnerPopupNext');
+            const skip = document.getElementById('beginnerPopupSkip');
+            const close = document.getElementById('beginnerPopupClose');
 
-            helpBoxes.forEach((box) => {
-                const storageKey = 'life-help-closed:' + box.id;
+            if (!overlay || !title || !text || !next || !skip || !close) return;
 
-                if (localStorage.getItem(storageKey) === 'yes') {
-                    box.remove();
-                    return;
+            const steps = [
+                {
+                    title: 'The Life title',
+                    text: 'Click “The Life” at the top-left to open index.html, the interactive biology game.'
+                },
+                {
+                    title: 'Lesson library',
+                    text: 'Use the left sidebar to open biology lessons. The first “The Life” link opens library.html.'
+                },
+                {
+                    title: 'Start learning',
+                    text: 'Choose “Start learning” for a guided route through the complete biology series.'
+                },
+                {
+                    title: 'Search chapters',
+                    text: 'Use “Search chapters” or the Search button at the top to quickly find any topic.'
+                },
+                {
+                    title: 'Subject cards',
+                    text: 'Click any subject card such as Cells, Human Biology, or Future Evolution to open that section.'
+                },
+                {
+                    title: 'Introduction video',
+                    text: 'Press Play to watch the introduction. Use the video controls for pause, volume, and fullscreen.'
                 }
+            ];
 
-                const closeButton = box.querySelector('[data-close-help]');
-                closeButton?.addEventListener('click', () => {
-                    localStorage.setItem(storageKey, 'yes');
-                    box.remove();
-                });
+            let step = 0;
+
+            const showStep = () => {
+                const item = steps[step];
+                title.textContent = item.title;
+                text.textContent = item.text;
+                next.textContent = step === steps.length - 1 ? 'Finish' : 'Next';
+                overlay.classList.add('open');
+                overlay.setAttribute('aria-hidden', 'false');
+                next.focus();
+            };
+
+            const finish = () => {
+                overlay.classList.remove('open');
+                overlay.setAttribute('aria-hidden', 'true');
+                localStorage.setItem('life-library-guide-seen', 'yes');
+            };
+
+            next.addEventListener('click', () => {
+                if (step < steps.length - 1) {
+                    step += 1;
+                    showStep();
+                } else {
+                    finish();
+                }
             });
+
+            skip.addEventListener('click', finish);
+            close.addEventListener('click', finish);
+
+            overlay.addEventListener('click', (event) => {
+                if (event.target === overlay) finish();
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && overlay.classList.contains('open')) {
+                    finish();
+                }
+            });
+
+            if (localStorage.getItem('life-library-guide-seen') !== 'yes') {
+                setTimeout(showStep, 700);
+            }
         })();
     </script>
 
