@@ -1447,14 +1447,89 @@
         @media(max-width:650px){.brandtext span{display:block;font-size:.62rem}.topbar .brandtext strong{font-size:.9rem}.intro-splash img{width:min(520px,90vw)}}
         @media(prefers-reduced-motion:reduce){.intro-splash img{animation:none!important}.intro-splash{transition:opacity .3s ease,visibility .3s ease}}
 
-    
-        /* Beginner-friendly wrapper elements added for clearer HTML structure */
-        .topbar-menu,
-        .topbar-brand,
-        .topbar-controls,
-        .top-action-item,
-        .nav-item {
-            display: contents;
+        /* BEGINNER HELP BOXES
+           These boxes are visible only on library.html.
+           Each box has an × button so the learner can close it. */
+        .beginner-help {
+            position: relative;
+            margin: 10px 0 14px;
+            padding: 13px 42px 13px 14px;
+            border: 1px solid color-mix(in srgb, var(--accent) 32%, var(--line));
+            border-left: 5px solid var(--accent);
+            border-radius: 14px;
+            background: color-mix(in srgb, var(--soft) 72%, var(--surface));
+            color: var(--text);
+            box-shadow: 0 8px 24px rgba(20, 30, 50, .07);
+            font-size: .82rem;
+            line-height: 1.5;
+        }
+
+        .beginner-help strong {
+            display: block;
+            margin-bottom: 3px;
+            color: var(--accent);
+            font-size: .86rem;
+        }
+
+        .beginner-help p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .beginner-help-close {
+            position: absolute;
+            top: 8px;
+            right: 9px;
+            width: 28px;
+            height: 28px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--line);
+            border-radius: 9px;
+            background: var(--surface);
+            color: var(--text);
+            font-size: 17px;
+            font-weight: 900;
+            line-height: 1;
+            cursor: pointer;
+        }
+
+        .beginner-help-close:hover,
+        .beginner-help-close:focus-visible {
+            border-color: var(--accent);
+            color: var(--accent);
+            outline: none;
+        }
+
+        .topbar-help {
+            position: fixed;
+            z-index: 1700;
+            top: 82px;
+            left: 18px;
+            width: min(360px, calc(100vw - 36px));
+            margin: 0;
+        }
+
+        .sidebar-help {
+            margin: 0 0 16px;
+        }
+
+        .content-help {
+            margin-bottom: 18px;
+        }
+
+        @media (max-width: 900px) {
+            .topbar-help {
+                top: 80px;
+                left: 12px;
+                width: calc(100vw - 24px);
+            }
+        }
+
+        @media print {
+            .beginner-help {
+                display: none !important;
+            }
         }
 
     </style>
@@ -1503,10 +1578,24 @@
             </div>
         </div>
     </header>
+    <div class="beginner-help topbar-help" id="helpBrand" role="note">
+        <button class="beginner-help-close" type="button"
+            aria-label="Close this beginner tip" data-close-help="helpBrand">×</button>
+        <strong>The Life title</strong>
+        <p>Click “The Life” at the top-left to open index.html, the interactive biology game.</p>
+    </div>
+
     <!-- PAGE SHELL: holds the sidebar and main content next to each other -->
     <div class="shell">
         <!-- SIDEBAR: contains course progress and links to every biology lesson -->
         <aside class="sidebar" id="sidebar">
+    <div class="beginner-help sidebar-help" id="helpSidebar" role="note">
+        <button class="beginner-help-close" type="button"
+            aria-label="Close this beginner tip" data-close-help="helpSidebar">×</button>
+        <strong>Lesson library</strong>
+        <p>Use these links to open lessons. The first “The Life” link opens library.html, the learning-library home page.</p>
+    </div>
+
             <!-- COURSE PROGRESS: shows completed lessons out of the total lessons -->
             <div class="course-card">
                 <div class="course-top"><span>Course progress</span><span data-count>0/59</span></div>
@@ -1614,6 +1703,13 @@
         <!-- MAIN CONTENT: contains the introduction, modules, video and footer -->
         <main class="main" id="content">
             <div class="wrap">
+    <div class="beginner-help content-help" id="helpContent" role="note">
+        <button class="beginner-help-close" type="button"
+            aria-label="Close this beginner tip" data-close-help="helpContent">×</button>
+        <strong>How to use this page</strong>
+        <p>Choose Start learning for the guided path, Search chapters to find a topic, or select a subject card below.</p>
+    </div>
+
                 <!-- HERO SECTION: introduces the website and gives learning/search actions -->
                 <section class="homehero">
                     <div class="homecopy"><span class="eyebrow"
@@ -1634,6 +1730,14 @@
                     </div>
                 </section>
                 <!-- INTRODUCTION VIDEO: plays the biology-series introduction -->
+                
+    <div class="beginner-help content-help" id="helpVideo" role="note">
+        <button class="beginner-help-close" type="button"
+            aria-label="Close this beginner tip" data-close-help="helpVideo">×</button>
+        <strong>Introduction video</strong>
+        <p>Press the play button to watch the introduction. Use the video controls to pause, change volume, or view fullscreen.</p>
+    </div>
+
                 <div class="videoshell"><video controls playsinline preload="metadata">
                         <source src="INTRO.mp4" type="video/mp4">Your browser cannot play this video.
                     </video></div>
@@ -1645,6 +1749,14 @@
                         possibilities.</p>
                 </div>
                 <!-- LEARNING MODULES: each card links to a major biology topic -->
+                
+    <div class="beginner-help content-help" id="helpModules" role="note">
+        <button class="beginner-help-close" type="button"
+            aria-label="Close this beginner tip" data-close-help="helpModules">×</button>
+        <strong>Subject cards</strong>
+        <p>Each box below is a clickable subject. Select one to open its biology lessons.</p>
+    </div>
+
                 <div class="modulegrid"><a class="module"
                         href="The Begining &amp; Classification of Life on Earth/The Begining of Planet Earth.html">
                         <div class="cardicon">🌍</div>
@@ -1713,6 +1825,31 @@
             const finish=()=>{splash.classList.add('done');setTimeout(()=>splash.remove(),900)};
             if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){setTimeout(finish,5000);return;}
             setTimeout(()=>{splash.classList.add('shrink');setTimeout(finish,1800)},5000);
+        })();
+    </script>
+
+
+    <script>
+        // BEGINNER HELP BOXES:
+        // Close a box when its × button is clicked.
+        // The closed state is remembered in this browser using localStorage.
+        (() => {
+            const helpBoxes = document.querySelectorAll('.beginner-help');
+
+            helpBoxes.forEach((box) => {
+                const storageKey = 'life-help-closed:' + box.id;
+
+                if (localStorage.getItem(storageKey) === 'yes') {
+                    box.remove();
+                    return;
+                }
+
+                const closeButton = box.querySelector('[data-close-help]');
+                closeButton?.addEventListener('click', () => {
+                    localStorage.setItem(storageKey, 'yes');
+                    box.remove();
+                });
+            });
         })();
     </script>
 
