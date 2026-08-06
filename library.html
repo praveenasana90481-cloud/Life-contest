@@ -1610,6 +1610,418 @@
             }
         }
 
+
+
+        /* =========================================================
+           UNIVERSAL RESPONSIVE & DEVICE-COMPATIBILITY OVERRIDES
+           Phones (320px+), tablets, laptops, desktops and touch devices
+           ========================================================= */
+        :root {
+            --topbar-h: 72px;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+            overflow-x: hidden;
+            scroll-padding-top: calc(var(--topbar-h) + 16px);
+        }
+
+        body {
+            width: 100%;
+            min-width: 0;
+            overflow-x: clip;
+            min-height: 100vh;
+            min-height: 100dvh;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            max-width: 100%;
+        }
+
+        button,
+        a,
+        input[type="radio"],
+        input[type="checkbox"] {
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        img,
+        video,
+        svg,
+        canvas,
+        iframe {
+            max-width: 100%;
+        }
+
+        iframe {
+            width: 100%;
+            border: 0;
+        }
+
+        pre,
+        code {
+            max-width: 100%;
+            overflow-wrap: anywhere;
+            white-space: pre-wrap;
+        }
+
+        .topbar {
+            min-height: var(--topbar-h);
+            height: auto;
+            padding-left: max(20px, env(safe-area-inset-left));
+            padding-right: max(20px, env(safe-area-inset-right));
+        }
+
+        .shell,
+        .main,
+        .wrap,
+        .article,
+        .card,
+        .module,
+        .mini,
+        .orgcard,
+        .toolcard {
+            min-width: 0;
+        }
+
+        .sidebar {
+            height: calc(100vh - var(--topbar-h));
+            height: calc(100dvh - var(--topbar-h));
+            overscroll-behavior: contain;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: max(40px, env(safe-area-inset-bottom));
+        }
+
+        .main {
+            padding-bottom: max(58px, calc(32px + env(safe-area-inset-bottom)));
+        }
+
+        .hero,
+        .card,
+        .toolcard,
+        .module,
+        .mini,
+        .orgcard,
+        .searchpanel {
+            overflow-wrap: anywhere;
+        }
+
+        .homecopy,
+        .homecopy h1,
+        .hero h1,
+        .sectionhead,
+        .meta,
+        .prevnext a,
+        .navgroup a {
+            min-width: 0;
+        }
+
+        .homecopy h1,
+        .hero h1 {
+            text-wrap: balance;
+        }
+
+        .homecopy p,
+        .hero p,
+        .sectionhead p,
+        .module p,
+        .orgcard p {
+            text-wrap: pretty;
+        }
+
+        .homeactions > *,
+        .heroactions > * {
+            min-height: 44px;
+        }
+
+        .iconbtn,
+        .menubtn,
+        .primary,
+        .secondary,
+        .herobtn {
+            min-height: 44px;
+        }
+
+        .tablewrap {
+            max-width: 100%;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior-inline: contain;
+        }
+
+        table {
+            font-size: clamp(.78rem, 1.2vw, 1rem);
+        }
+
+        .searchmodal {
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding-top: max(8vh, env(safe-area-inset-top));
+            padding-left: max(18px, env(safe-area-inset-left));
+            padding-right: max(18px, env(safe-area-inset-right));
+            padding-bottom: max(18px, env(safe-area-inset-bottom));
+        }
+
+        .searchhead input {
+            min-width: 0;
+        }
+
+        #top {
+            right: max(20px, env(safe-area-inset-right));
+            bottom: max(20px, env(safe-area-inset-bottom));
+        }
+
+        .toast {
+            width: max-content;
+            max-width: calc(100vw - 24px);
+            text-align: center;
+            bottom: max(27px, env(safe-area-inset-bottom));
+        }
+
+        @media (hover: none) {
+            .iconbtn:hover,
+            .menubtn:hover,
+            .module:hover,
+            .related a:hover,
+            .orgcard:hover,
+            .floating-tip:hover,
+            .floating-guide-dismiss-all:hover {
+                transform: none;
+            }
+        }
+
+        @media (max-width: 900px) {
+            :root { --topbar-h: 64px; }
+
+            .topbar {
+                min-height: var(--topbar-h);
+                gap: 8px;
+            }
+
+            .sidebar {
+                top: var(--topbar-h);
+                height: calc(100vh - var(--topbar-h));
+                height: calc(100dvh - var(--topbar-h));
+            }
+
+            .homehero {
+                min-height: auto;
+                padding-block: 18px;
+            }
+        }
+
+        @media (max-width: 650px) {
+            :root { --topbar-h: 60px; }
+
+            .topbar {
+                padding-left: max(9px, env(safe-area-inset-left));
+                padding-right: max(9px, env(safe-area-inset-right));
+            }
+
+            .top-actions {
+                gap: 5px;
+            }
+
+            .iconbtn,
+            .menubtn {
+                min-width: 42px;
+                height: 42px;
+                padding-inline: 9px;
+            }
+
+            .main {
+                padding-left: max(12px, env(safe-area-inset-left));
+                padding-right: max(12px, env(safe-area-inset-right));
+            }
+
+            .homecopy h1 {
+                font-size: clamp(2.65rem, 16vw, 4rem);
+                line-height: .94;
+            }
+
+            .hero h1 {
+                font-size: clamp(2rem, 11vw, 2.55rem);
+            }
+
+            .hero,
+            .card {
+                border-radius: 18px;
+            }
+
+            .stats {
+                gap: 9px;
+            }
+
+            .stat {
+                padding: 13px;
+            }
+
+            .homeactions,
+            .heroactions,
+            .quizactions {
+                display: grid;
+                grid-template-columns: 1fr;
+            }
+
+            .homeactions > *,
+            .heroactions > *,
+            .quizactions > button {
+                width: 100%;
+            }
+
+            .meta {
+                flex-wrap: wrap;
+            }
+
+            .searchmodal {
+                padding: 10px;
+                padding-top: max(10px, env(safe-area-inset-top));
+            }
+
+            .searchpanel {
+                border-radius: 17px;
+                max-height: calc(100vh - 20px);
+                max-height: calc(100dvh - 20px);
+            }
+
+            .results {
+                max-height: calc(100vh - 92px);
+                max-height: calc(100dvh - 92px);
+            }
+
+            /* Floating walkthrough cards obstruct small screens; controls remain fully usable. */
+            .floating-guide-layer {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .brandtext strong {
+                font-size: .85rem;
+            }
+
+            .brandtext span {
+                display: none !important;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .homecopy h1 {
+                font-size: clamp(2.35rem, 15vw, 3.25rem);
+            }
+
+            .hero {
+                padding: 23px 17px;
+            }
+
+            .card {
+                padding: 18px 15px;
+            }
+
+            .orbit {
+                width: min(252px, 78vw);
+            }
+
+            .core {
+                width: 88px;
+                height: 88px;
+                font-size: 40px;
+            }
+
+            .planet {
+                width: 42px;
+                height: 42px;
+                font-size: 21px;
+            }
+
+            th,
+            td {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 350px) {
+            .topbar {
+                gap: 4px;
+            }
+
+            .iconbtn,
+            .menubtn {
+                min-width: 38px;
+                width: 38px;
+                height: 40px;
+                padding: 0;
+            }
+
+            .brandtext strong {
+                font-size: .78rem;
+            }
+
+            .main {
+                padding-inline: 9px;
+            }
+
+            .homecopy h1 {
+                font-size: 2.15rem;
+            }
+        }
+
+        @media (max-height: 520px) and (orientation: landscape) {
+            :root { --topbar-h: 54px; }
+
+            .topbar {
+                min-height: var(--topbar-h);
+            }
+
+            .sidebar {
+                top: var(--topbar-h);
+                height: calc(100dvh - var(--topbar-h));
+            }
+
+            .homehero {
+                grid-template-columns: 1.15fr .85fr;
+                gap: 16px;
+                padding-block: 8px;
+            }
+
+            .visual {
+                min-height: 230px;
+            }
+
+            .orbit {
+                width: min(220px, 42vw, 65vh);
+            }
+
+            .intro-splash img {
+                max-height: 55dvh;
+            }
+        }
+
+        @media (min-width: 1700px) {
+            .shell {
+                max-width: 1760px;
+            }
+
+            .wrap {
+                max-width: 1320px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+            }
+        }
+
     </style>
 </head>
 
@@ -2037,6 +2449,59 @@
             addEventListener('scroll', placeAllTips, { passive: true });
 
             waitForSplash();
+        })();
+    </script>
+
+
+    <script>
+        // Cross-device navigation and viewport refinements.
+        (() => {
+            const sidebar = document.getElementById('sidebar');
+            const menu = document.getElementById('menu');
+            const modal = document.getElementById('searchModal');
+
+            const closeSidebar = () => {
+                if (!sidebar) return;
+                sidebar.classList.remove('open');
+                document.body.classList.remove('lock');
+                menu?.setAttribute('aria-expanded', 'false');
+            };
+
+            menu?.setAttribute('aria-expanded', sidebar?.classList.contains('open') ? 'true' : 'false');
+
+            menu?.addEventListener('click', () => {
+                requestAnimationFrame(() => {
+                    const open = sidebar?.classList.contains('open');
+                    menu.setAttribute('aria-expanded', open ? 'true' : 'false');
+                    document.body.classList.toggle('lock', Boolean(open && innerWidth <= 900));
+                });
+            });
+
+            sidebar?.addEventListener('click', (event) => {
+                if (innerWidth <= 900 && event.target.closest('a')) closeSidebar();
+                if (innerWidth <= 900 && event.target === sidebar) closeSidebar();
+            });
+
+            document.addEventListener('pointerdown', (event) => {
+                if (innerWidth > 900 || !sidebar?.classList.contains('open')) return;
+                if (!sidebar.contains(event.target) && !menu?.contains(event.target)) closeSidebar();
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key !== 'Escape') return;
+                closeSidebar();
+                modal?.classList.remove('open');
+                document.body.classList.remove('lock');
+            });
+
+            const syncLayout = () => {
+                if (innerWidth > 900) closeSidebar();
+                document.documentElement.style.setProperty('--app-height', `${innerHeight}px`);
+            };
+
+            addEventListener('resize', syncLayout, { passive: true });
+            addEventListener('orientationchange', syncLayout, { passive: true });
+            syncLayout();
         })();
     </script>
 
